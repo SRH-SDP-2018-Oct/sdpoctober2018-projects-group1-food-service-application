@@ -25,12 +25,12 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `orderid` bigint(20) NOT NULL,
   `ordertime` datetime DEFAULT NULL,
-  `deliverytype` enum('y','n') DEFAULT NULL,
+  `deliverytype` varchar(45) DEFAULT NULL,
   `foodprice` float DEFAULT NULL,
   `deliverycharge` float DEFAULT NULL,
   `totalamount` tinyint(4) DEFAULT NULL,
   `orderlocation` text,
-  `paymenttype` enum('c','o') DEFAULT NULL,
+  `paymenttype` varchar(45) DEFAULT NULL,
   `fsausername` varchar(45) DEFAULT NULL,
   `customerusername` varchar(45) DEFAULT NULL,
   `foodid` bigint(20) DEFAULT NULL,
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-26 16:59:16
+-- Dump completed on 2018-11-27 18:13:12

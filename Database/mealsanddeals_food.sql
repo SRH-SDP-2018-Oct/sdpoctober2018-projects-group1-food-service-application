@@ -23,15 +23,16 @@ DROP TABLE IF EXISTS `food`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `food` (
-  `nameofmeal` enum('b','l','d') DEFAULT NULL,
+  `nameofmeal` varchar(45) DEFAULT NULL,
   `foodname` varchar(45) DEFAULT NULL,
   `foodtype` varchar(45) DEFAULT NULL,
-  `hotorcold` enum('h','c') DEFAULT NULL,
+  `hotorcold` varchar(45) DEFAULT NULL,
   `available` tinyint(4) DEFAULT NULL,
   `totalamount` tinyint(4) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `deliverytype` enum('y','n') DEFAULT NULL,
-  `paymenttype` enum('c','o') DEFAULT NULL,
+  `cash` enum('y','n') DEFAULT NULL,
+  `online` enum('y','n') DEFAULT NULL,
   `date` date DEFAULT NULL,
   `dateofadding` datetime DEFAULT NULL,
   `foodid` bigint(20) NOT NULL,
@@ -48,6 +49,7 @@ CREATE TABLE `food` (
 
 LOCK TABLES `food` WRITE;
 /*!40000 ALTER TABLE `food` DISABLE KEYS */;
+INSERT INTO `food` VALUES ('b','name','fastfood','h',10,10,10.5,'n',NULL,NULL,'2018-11-29','2018-11-27 00:00:00',315684135843,'ash');
 /*!40000 ALTER TABLE `food` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-26 16:59:15
+-- Dump completed on 2018-11-27 18:13:11
