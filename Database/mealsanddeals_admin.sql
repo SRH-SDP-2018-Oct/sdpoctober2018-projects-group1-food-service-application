@@ -16,41 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `order`
+-- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `order` (
-  `orderid` bigint(20) NOT NULL,
-  `ordertime` datetime DEFAULT NULL,
-  `deliverytype` varchar(45) DEFAULT NULL,
-  `foodprice` float DEFAULT NULL,
-  `deliverycharge` float DEFAULT NULL,
-  `totalamount` tinyint(4) DEFAULT NULL,
-  `orderlocation` text,
-  `paymenttype` varchar(45) DEFAULT NULL,
-  `fsausername` varchar(45) DEFAULT NULL,
-  `customerusername` varchar(45) DEFAULT NULL,
-  `foodid` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`orderid`),
-  KEY `fsausernameorder_idx` (`fsausername`),
-  KEY `customerusernameorder_idx` (`customerusername`),
-  KEY `foodidorder_idx` (`foodid`),
-  CONSTRAINT `customerusernameorder` FOREIGN KEY (`customerusername`) REFERENCES `customer` (`customerusername`),
-  CONSTRAINT `foodidorder` FOREIGN KEY (`foodid`) REFERENCES `food` (`foodid`),
-  CONSTRAINT `fsausernameorder` FOREIGN KEY (`fsausername`) REFERENCES `fsa` (`fsausername`)
+CREATE TABLE `admin` (
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order`
+-- Dumping data for table `admin`
 --
 
-LOCK TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -62,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 11:04:08
+-- Dump completed on 2018-11-28 11:04:07
