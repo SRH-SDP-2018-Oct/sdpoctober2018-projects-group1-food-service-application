@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `fsa`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `fsa` (
   `name` varchar(45) DEFAULT NULL,
-  `sex` enum('m','f') DEFAULT NULL,
+  `sex` enum('Male','Female') DEFAULT NULL,
   `birthday` date DEFAULT NULL,
   `nationality` varchar(45) DEFAULT NULL,
   `address` text,
@@ -32,11 +32,10 @@ CREATE TABLE `fsa` (
   `phonenumber` varchar(45) DEFAULT NULL,
   `fsausername` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `profilepicture` blob,
   `taxid` bigint(20) DEFAULT NULL,
   `cookingcertificate` blob,
   `businesscertificate` blob,
-  `validation` enum('y','n') DEFAULT NULL,
+  `validation` enum('Active','Inactive') DEFAULT NULL,
   PRIMARY KEY (`fsausername`),
   UNIQUE KEY `taxid_UNIQUE` (`taxid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -48,7 +47,6 @@ CREATE TABLE `fsa` (
 
 LOCK TABLES `fsa` WRITE;
 /*!40000 ALTER TABLE `fsa` DISABLE KEYS */;
-INSERT INTO `fsa` VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,'ash',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `fsa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 11:04:06
+-- Dump completed on 2018-11-28 12:16:05

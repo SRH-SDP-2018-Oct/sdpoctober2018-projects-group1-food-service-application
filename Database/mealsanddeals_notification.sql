@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `notification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `notification` (
-  `notificationid` bigint(20) NOT NULL,
+  `notificationid` bigint(20) NOT NULL AUTO_INCREMENT,
   `senderusername` varchar(45) DEFAULT NULL,
   `receiverusername` varchar(45) DEFAULT NULL,
   `subject` varchar(45) DEFAULT NULL,
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 11:04:07
+-- Dump completed on 2018-11-28 12:16:06

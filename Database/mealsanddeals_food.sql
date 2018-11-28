@@ -30,16 +30,15 @@ CREATE TABLE `food` (
   `available` tinyint(4) DEFAULT NULL,
   `totalamount` tinyint(4) DEFAULT NULL,
   `price` float DEFAULT NULL,
-  `deliverytype` enum('y','n') DEFAULT NULL,
-  `cash` enum('y','n') DEFAULT NULL,
-  `online` enum('y','n') DEFAULT NULL,
+  `deliverytype` enum('Yes','No') DEFAULT NULL,
+  `cash` enum('Yes','No') DEFAULT NULL,
+  `online` enum('Yes','No') DEFAULT NULL,
   `date` date DEFAULT NULL,
   `dateofadding` datetime DEFAULT NULL,
-  `foodid` bigint(20) NOT NULL,
+  `foodid` bigint(20) NOT NULL AUTO_INCREMENT,
   `fsausername` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`foodid`),
-  KEY `fsausernamefood_idx` (`fsausername`),
-  CONSTRAINT `fsausernamefood` FOREIGN KEY (`fsausername`) REFERENCES `fsa` (`fsausername`)
+  KEY `fsausernamefood_idx` (`fsausername`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -49,7 +48,6 @@ CREATE TABLE `food` (
 
 LOCK TABLES `food` WRITE;
 /*!40000 ALTER TABLE `food` DISABLE KEYS */;
-INSERT INTO `food` VALUES ('b','name','fastfood','h',10,10,10.5,'n',NULL,NULL,'2018-11-29','2018-11-27 00:00:00',315684135843,'ash');
 /*!40000 ALTER TABLE `food` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 11:04:07
+-- Dump completed on 2018-11-28 12:16:07

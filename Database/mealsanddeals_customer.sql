@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `customer`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `customer` (
   `name` varchar(45) DEFAULT NULL,
-  `sex` enum('m','f') DEFAULT NULL,
+  `sex` enum('Male','Female') DEFAULT NULL,
   `birthday` date DEFAULT NULL,
   `nationality` varchar(45) DEFAULT NULL,
   `address` text,
@@ -32,7 +32,6 @@ CREATE TABLE `customer` (
   `phonenumber` varchar(45) DEFAULT NULL,
   `customerusername` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `profilepicture` blob,
   PRIMARY KEY (`customerusername`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -43,7 +42,6 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('ash','m','1988-04-19','Iran','mps3','ashkan.ee@gmail.com','+49111111496','ash11866','123456',''),('ash','m','1988-04-19','Iran','a','a','98','ashee-ashee','1234567',NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 11:04:06
+-- Dump completed on 2018-11-28 12:16:05

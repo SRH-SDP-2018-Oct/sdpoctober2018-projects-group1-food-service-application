@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `ranking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `ranking` (
-  `rankingid` bigint(20) NOT NULL,
+  `rankingid` bigint(20) NOT NULL AUTO_INCREMENT,
   `customerusername` varchar(45) DEFAULT NULL,
   `fsausername` varchar(45) DEFAULT NULL,
   `quality` float DEFAULT NULL,
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 11:04:07
+-- Dump completed on 2018-11-28 12:16:06
