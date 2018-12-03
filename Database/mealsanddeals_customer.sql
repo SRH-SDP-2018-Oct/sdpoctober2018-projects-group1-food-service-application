@@ -42,6 +42,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES ('Ashkan Es Haghi','Male','1988-04-19','Iran','MPS3','ashkan.ee@gmail.com','+491626092491','ash11866','2852f697a9f8581725c6fc6a5472a2e5'),('Jisu Park','Female','1990-01-01','Korean','MPS3','a@a.com','+491626092491','jisu123','544e25c16fb2617e5816d3e5b108de6c');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 12:16:05
+-- Dump completed on 2018-12-03 15:35:08
