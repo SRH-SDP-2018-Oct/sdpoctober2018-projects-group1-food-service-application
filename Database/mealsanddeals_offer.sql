@@ -28,6 +28,7 @@ CREATE TABLE `offer` (
   `foodamount` tinyint(4) DEFAULT NULL,
   `discount` float DEFAULT NULL,
   `fsausername` varchar(45) DEFAULT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`offerid`),
   KEY `foodidoffer_idx` (`foodid`),
   CONSTRAINT `foodidoffer` FOREIGN KEY (`foodid`) REFERENCES `food` (`foodid`)
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-03 15:35:09
+-- Dump completed on 2018-12-04 18:35:42

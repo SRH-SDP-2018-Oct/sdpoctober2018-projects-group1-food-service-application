@@ -39,7 +39,7 @@ CREATE TABLE `food` (
   `fsausername` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`foodid`),
   KEY `fsausernamefood_idx` (`fsausername`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `food` (
 
 LOCK TABLES `food` WRITE;
 /*!40000 ALTER TABLE `food` DISABLE KEYS */;
-INSERT INTO `food` VALUES ('Breakfast','chicken','Iranian','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',1,'ash2'),('Breakfast','rice','Italian','Hot',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',2,'ash4'),('Breakfast','rice','Indian','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',3,'ash2'),('Breakfast','rice','German','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',4,'ash4'),('Breakfast','rice','Turkish','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',5,'ash2'),('Breakfast','rice','Indian','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',6,'ash4'),('Breakfast','rice','Iranian','Cold',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',7,'ash4'),('Breakfast','rice','Indian','Hot',0,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',8,'ash2'),('Breakfast','rice','German','Cold',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',9,'ash2'),('Breakfast','rice','Indian','Cold',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',10,'ash2'),('Breakfast','rice','South Korean','Cold',0,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',11,'ash2'),('Breakfast','rice','South Korean','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',12,'ash2'),('Breakfast','rice','North Korean','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',13,'ash4'),('Breakfast','rice','Bla','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',14,'ash4'),('Breakfast','rice','French','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',15,'ash2'),('Breakfast','rice','Indian','Cold',0,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',16,'ash2'),('Breakfast','rice','Indian','Hot',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',17,'ash4');
+INSERT INTO `food` VALUES ('Breakfast','chicken','Iranian','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',1,'ash2'),('Breakfast','rice','Italian','Hot',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',2,'ash4'),('Breakfast','rice','Indian','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',3,'ash2'),('Breakfast','rice','German','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',4,'ash4'),('Breakfast','rice','Turkish','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',5,'ash2'),('Breakfast','rice','Indian','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',6,'ash4'),('Breakfast','rice','Iranian','Cold',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',7,'ash4'),('Breakfast','rice','Indian','Hot',0,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',8,'ash2'),('Breakfast','rice','German','Cold',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',9,'ash2'),('Breakfast','rice','Indian','Cold',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',10,'ash2'),('Breakfast','rice','South Korean','Cold',0,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',11,'ash2'),('Breakfast','rice','South Korean','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',12,'ash2'),('Breakfast','rice','North Korean','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',13,'ash4'),('Breakfast','rice','Bla','Cold',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',14,'ash4'),('Breakfast','rice','French','Hot',10,10,10,'Yes','Yes','Yes','2018-12-01','2018-12-01 12:00:00',15,'ash2'),('Breakfast','rice','Indian','Cold',0,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',16,'ash2'),('Breakfast','rice','Indian','Hot',10,10,10,'Yes','Yes','No','2018-12-01','2018-12-01 12:00:00',17,'ash4'),('Lunch','rice','Indian','Hot',2,10,12,'No','Yes','No','2018-12-04','2018-12-04 12:12:12',18,'ash8');
 /*!40000 ALTER TABLE `food` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-03 15:35:09
+-- Dump completed on 2018-12-04 18:35:43

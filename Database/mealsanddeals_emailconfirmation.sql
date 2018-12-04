@@ -16,35 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customer`
+-- Table structure for table `emailconfirmation`
 --
 
-DROP TABLE IF EXISTS `customer`;
+DROP TABLE IF EXISTS `emailconfirmation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `customer` (
-  `name` varchar(45) DEFAULT NULL,
-  `sex` enum('Male','Female') DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `nationality` varchar(45) DEFAULT NULL,
-  `address` text,
-  `email` varchar(45) DEFAULT NULL,
-  `phonenumber` varchar(45) DEFAULT NULL,
-  `customerusername` varchar(45) NOT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`customerusername`),
+CREATE TABLE `emailconfirmation` (
+  `email` varchar(45) NOT NULL,
+  PRIMARY KEY (`email`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customer`
+-- Dumping data for table `emailconfirmation`
 --
 
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('Ashkan Es Haghi','Male','1988-04-19','Iran','MPS3','ashkan.ee@gmail.com','+491626092491','ash11866','2852f697a9f8581725c6fc6a5472a2e5'),('Jisu Park','Female','1990-01-01','Korean','MPS3','a@a.com','+491626092491','jisu123','544e25c16fb2617e5816d3e5b108de6c');
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+LOCK TABLES `emailconfirmation` WRITE;
+/*!40000 ALTER TABLE `emailconfirmation` DISABLE KEYS */;
+INSERT INTO `emailconfirmation` VALUES ('ashkan.ee@gmail.com'),('ashkan.ess@gmail.com');
+/*!40000 ALTER TABLE `emailconfirmation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-04 18:35:41
+-- Dump completed on 2018-12-04 18:35:42
