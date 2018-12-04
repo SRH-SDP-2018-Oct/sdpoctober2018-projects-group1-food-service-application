@@ -1,18 +1,21 @@
 package com.srh_heidelberg.mealsanddeals;
 
 public class Order {
-	
+
 	private long orderid;
 	private String ordertime;
-	private String[] deliverytype;
+	private String deliverytype;
 	private float foodprice;
 	private float deliverycharge;
 	private short totalamount;
 	private String orderlocation;
-	private String[] paymenttype;
+	private String paymenttype;
 	private String fsausername;
 	private String customerusername;
 	private long foodid;
+	private String[] ranking;
+	private String[] status;
+
 	
 	public long getOrderid() {
 		return orderid;
@@ -26,10 +29,10 @@ public class Order {
 	public void setOrdertime(String ordertime) {
 		this.ordertime = ordertime;
 	}
-	public String[] getDeliverytype() {
+	public String getDeliverytype() {
 		return deliverytype;
 	}
-	public void setDeliverytype(String[] deliverytype) {
+	public void setDeliverytype(String deliverytype) {
 		this.deliverytype = deliverytype;
 	}
 	public float getFoodprice() {
@@ -56,10 +59,10 @@ public class Order {
 	public void setOrderlocation(String orderlocation) {
 		this.orderlocation = orderlocation;
 	}
-	public String[] getPaymenttype() {
+	public String getPaymenttype() {
 		return paymenttype;
 	}
-	public void setPaymenttype(String[] paymenttype) {
+	public void setPaymenttype(String paymenttype) {
 		this.paymenttype = paymenttype;
 	}
 	public String getFsausername() {
@@ -80,5 +83,17 @@ public class Order {
 	public void setFoodid(long foodid) {
 		this.foodid = foodid;
 	}
-
+	public String[] getRanking() {
+		return ranking;
+	}
+	public void setRanking(String[] ranking) {
+		this.ranking = ranking;
+	}
+	public String[] getStatus() {
+		return status;
+	}
+	public void setStatus(String[] status) {
+		this.status = status;
+	}
+	
 }
