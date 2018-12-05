@@ -1,28 +1,31 @@
-import java.sql.Date;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Date;
 
 public class Food {
-	private char nameofmeal;
+	private String nameofmeal;
 	private String foodname;
 	private String foodtype;
 	private String hotorcold;
 	private Byte available;
 	private Byte totalamount;
 	private float price;
-	private char deliveryoption;
-	private char cash;
-	private char onilne;
+	private String deliveryoption;
+	private String cash;
+	private String online;
 	private Date date;
 	private Date dateofadding; // need change -> Datetime
 	private long foodid;
 	private String fasusername;
 	
-	public char getNameofmeal() {
+	public String getNameofmeal() {
 		return nameofmeal;
 	}
 	public void setNameofmeal(String nameofmeal) {
-		this.nameofmeal = nameofmeal.charAt(0);
+		this.nameofmeal = nameofmeal;
 	}
 	public String getFoodname() {
 		return foodname;
@@ -60,23 +63,23 @@ public class Food {
 	public void setPrice(String price) {
 		this.price = Float.valueOf(price);
 	}
-	public char getDeliveryoption() {
+	public String getDeliveryoption() {
 		return deliveryoption;
 	}
 	public void setDeliveryoption(String deliveryoption) {
-		this.deliveryoption = deliveryoption.charAt(0);
+		this.deliveryoption = deliveryoption;
 	}
-	public char getCash() {
+	public String getCash() {
 		return cash;
 	}
 	public void setCash(String cash) {
-		this.cash = cash.charAt(0);
+		this.cash = cash;
 	}
-	public char getOnilne() {
-		return onilne;
+	public String getOnline() {
+		return online;
 	}
-	public void setOnilne(String onilne) {
-		this.onilne = onilne.charAt(0);
+	public void setOnline(String online) {
+		this.online = online;
 	}
 	public Date getDate() {
 		return date;
@@ -104,5 +107,4 @@ public class Food {
 	public void setFasusername(String fasusername) {
 		this.fasusername = fasusername;
 	}
-	
 }
