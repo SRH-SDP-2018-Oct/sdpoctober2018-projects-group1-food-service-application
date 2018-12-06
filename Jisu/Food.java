@@ -16,8 +16,8 @@ public class Food {
 	private String deliveryoption;
 	private String cash;
 	private String online;
-	private Date date;
-	private Date dateofadding; // need change -> Datetime
+	private String date;
+	private String dateofadding; // need change -> Datetime
 	private long foodid;
 	private String fasusername;
 	
@@ -81,19 +81,17 @@ public class Food {
 	public void setOnline(String online) {
 		this.online = online;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(String date) throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		this.date = (Date) formatter.parse(date);
+	public void setDate(String date)  {
+		this.date = date;
 	}
-	public Date getDateofadding() {
+	public String getDateofadding() {
 		return dateofadding;
 	}
-	public void setDateofadding(String dateofadding) throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-		this.dateofadding = (Date) formatter.parse(dateofadding);
+	public void setDateofadding(String dateofadding) {
+		this.dateofadding = dateofadding;
 	}
 	public long getFoodid() {
 		return foodid;
@@ -106,5 +104,19 @@ public class Food {
 	}
 	public void setFasusername(String fasusername) {
 		this.fasusername = fasusername;
+	}
+	public void setFood(ArrayList<String> foodcolumn, ArrayList<String[]> foodinfo) {
+		int i=0;
+		foodinfo.add(new String[] { foodcolumn.get(i++), getNameofmeal()});
+		foodinfo.add(new String[] { foodcolumn.get(i++), getFoodname()});
+		foodinfo.add(new String[] { foodcolumn.get(i++), getFoodtype()});
+		foodinfo.add(new String[] { foodcolumn.get(i++), getHotorcold()});
+		foodinfo.add(new String[] { foodcolumn.get(i++), String.valueOf(getAvailable())});
+		foodinfo.add(new String[] { foodcolumn.get(i++), String.valueOf(getTotalamount())});
+		foodinfo.add(new String[] { foodcolumn.get(i++), String.valueOf(getPrice())});
+		foodinfo.add(new String[] { foodcolumn.get(i++), getDeliveryoption()});
+		foodinfo.add(new String[] { foodcolumn.get(i++), getCash()});
+		foodinfo.add(new String[] { foodcolumn.get(i++), getOnline()});
+		foodinfo.add(new String[] { foodcolumn.get(i++), getDate()});
 	}
 }
