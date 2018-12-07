@@ -132,7 +132,6 @@ public class MysqlCon{
 				username = "username";
 			} else if(tablename1.equals("fsa")) {
 				query = "select * from "+tablename1+" where fsausername='"+detail.get(0)+"' and password='"+detail.get(1)+"'";
-				
 				username = "fsausername";
 			} else if(tablename1.equals("customer")) {
 				query = "select * from "+tablename1+" where customerusername='"+detail.get(0)+"' and password='"+detail.get(1)+"'";
@@ -164,7 +163,7 @@ public class MysqlCon{
 					else
 					{
 						System.out.println("Your Account is not Active yet..");
-						ProfileUpdate.fsaprofileUpdate(rs.getString(username));
+						ProfileUpdate.inactiveFsaprofileUpdate(rs.getString(username));
 						MealsandDeals.main(null);
 					}
 				} 
@@ -750,6 +749,8 @@ public static String oldValueShow(String tablename , String enteredValue , Strin
 	return enteredValue;
 }
 
+
+
 public static void updateTable(String tablename, ArrayList<String[]> detail, ArrayList<String[]> condition) throws SQLException {
 	int i = 0;
 	String query = "";
@@ -768,15 +769,8 @@ public static void updateTable(String tablename, ArrayList<String[]> detail, Arr
 	try {
 		conn = createConn();
 		prStmt = conn.prepareStatement("update "+ tablename + " set " + query +" where " + condition.get(0)[0] + "='" + condition.get(0)[1]+"'");
-//		String updateq = "update "+ tablename + " set " + query +" where " + condition.get(0)[0] + "='" + condition.get(0)[1]+"'";
 		prStmt.executeUpdate();
-		System.out.println("update "+ tablename + " set " + query +" where " + condition.get(0)[0] + "='" + condition.get(0)[1]+"'");
-/*		
-		if(r==0)
-			System.out.println("cannot update data");
-		else
-			System.out.println("successfully updated data");*/
-			
+		
 	} catch (SQLException ex) {
 		System.out.println(ex);
 		ex.printStackTrace();
@@ -788,6 +782,7 @@ public static void updateTable(String tablename, ArrayList<String[]> detail, Arr
 		closeConn(conn);
 	}
 }
+
 public static void selectFood(String tablename, ArrayList<String[]> detail, ArrayList<Food> foodlist){	
 	int i = 0;
 	String query = "";
@@ -807,9 +802,7 @@ public static void selectFood(String tablename, ArrayList<String[]> detail, Arra
 		Statement stmt = (Statement) conn.createStatement();
 		String selectq = "select * from "+ tablename + " where "+ query;
 		ResultSet rs = stmt.executeQuery(selectq);
-		ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
 		int k=1;
-		int cn = md.getColumnCount();
 		
 		while(rs.next()) {
 			Food newFood = new Food();
@@ -833,7 +826,6 @@ public static void selectFood(String tablename, ArrayList<String[]> detail, Arra
 		conn.close();
 			
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
@@ -855,9 +847,7 @@ public static void selectOffer(String tablename, ArrayList<String[]> detail, Arr
 		Statement stmt = (Statement) conn.createStatement();
 		String selectq = "select * from "+ tablename + " where "+ query;
 		ResultSet rs = stmt.executeQuery(selectq);
-		ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
 		int k=1;
-		int cn = md.getColumnCount();
 		
 		while(rs.next()) {
 			Offer newOffer = new Offer();
@@ -873,7 +863,6 @@ public static void selectOffer(String tablename, ArrayList<String[]> detail, Arr
 		conn.close();
 			
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
@@ -903,7 +892,6 @@ public static void deleteFromTable(String tablename, ArrayList<String[]> detail)
 		conn.close();
 			
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 }
@@ -920,7 +908,6 @@ public static void getColumnName(String tablename, ArrayList<String> columnname)
 			columnname.add(md.getColumnName(i));
 		
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	

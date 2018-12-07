@@ -1,22 +1,18 @@
 package com.srh_heidelberg.mealsanddeals;
 
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarPage extends CustomerPage {
-private Ranking ranking = new Ranking();
-private Cal calendar = new Cal();
 private Food food = new Food();
-private CustomerMain navi = new CustomerMain();
 private static Customer loggedInCust = new Customer();
 
-private void Rank() {
-}
-
 private List<Food> showFoodList() {
-	List<Food> availableFoods = new ArrayList();
+	List<Food> availableFoods = new ArrayList<Food>();
 	for (int i = 0; i<=10;i++) {
 		availableFoods.add(food);
 		System.out.println("Available foods:\n");
@@ -26,20 +22,6 @@ private List<Food> showFoodList() {
 
 return availableFoods;
 }
-
-private void selectFilters() {
-	System.out.println("Select filters for food");
-}
-
-private void showFilteredFoodList(String[] selectedFilters) {
-	System.out.println("Food List got filtered. To continue press [1]");
-	int i = 0;
-	while(i<selectedFilters.length) {
-		System.out.println("You selected" +selectedFilters[i].toString()+" as a Filter");	
-		i++;
-	}
-}
-
 
 private void optionsSelectedDate() {
 	System.out.println("If you filter the available food press [1]\n if you want to select another date press [2]");
@@ -65,18 +47,17 @@ private void selectFood() {
 }
 
 @Override
-public void Overview(Customer loggedInCustomer) {
+public void Overview(Customer loggedInCustomer) throws NoSuchAlgorithmException, ParseException, SQLException {
 	loggedInCust = loggedInCustomer;
 	System.out.println("\n1 - to Return to Homepage\n2 - to show the Calendar");
 	Scanner reader = new Scanner(System.in);
 	int customerInput = reader.nextInt();
 	switch (customerInput) {
-	case 1: navi.navigation(loggedInCust);
+	case 1: CustomerMain.navigation(loggedInCust);
 	break;
 	case 2: try {
-			calendar.ShowCalendar();
+			Cal.ShowCalendar();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			showFoodList();
@@ -86,13 +67,11 @@ public void Overview(Customer loggedInCustomer) {
 	Overview();
 	break;
 	}
-	reader.close();
 	
 }
 
 @Override
 public void Overview() {
-	// TODO Auto-generated method stub
 	
 }
 }

@@ -1,26 +1,32 @@
 package com.srh_heidelberg.mealsanddeals;
 
-import java.util.*;
-import java.math.*;
-import java.security.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import com.srh_heidelberg.mealsanddeals.MysqlCon;
+public class ProfileCustomer {
+	private static Customer loggedInCust = new Customer();
+	public static void decisioner(Customer loggedInCustomer) throws NoSuchAlgorithmException, SQLException, ParseException {
+		loggedInCust = loggedInCustomer;
+		customerProfileUpdate();
+		
+	}
 
-public class ProfileUpdate {
-    public static void inactiveFsaprofileUpdate( String username ) throws NoSuchAlgorithmException, SQLException{
-    
-	String[] tableItem = {"Name","Sex","Birthday","Nationality","Address","Phone Number","Password","Tax ID","Cooking Certificate","Business Certificate"};
+    public static void customerProfileUpdate() throws NoSuchAlgorithmException, SQLException, ParseException{
+        
+	String[] tableItem = {"Name","Sex","Birthday","Nationality","Address","Phone Number","Password"};
     ArrayList<String[]> detail = new ArrayList<String[]>();
     ArrayList<String[]> condition = new ArrayList<String[]>();
     Scanner input = new Scanner(System.in);
-    String tablename = "fsa";
-    String decisionMaker = "";
-    String enteredValue = "";
+    String tablename = "customer";
     String oldValue = "";
     String checkingColumnLabel = null;
-    String columnLabel = "fsausername";
-    condition.add(new String[] {columnLabel,username});
+    String columnLabel = "customerusername";
+    condition.add(new String[] {columnLabel,loggedInCust.getCustomerusername()});
     int i = 0;
     while(i < tableItem.length) {
     	switch (tableItem[i]) {
@@ -52,18 +58,6 @@ public class ProfileUpdate {
     		checkingColumnLabel = "password";
     		break;
     	}
-    	case "Tax ID":{
-    		checkingColumnLabel = "taxid";
-    		break;
-    	}
-    	case "Cooking Certificate":{
-    		checkingColumnLabel = "cookingcertificate";
-    		break;
-    	}
-    	case "Business Certificate":{
-    		checkingColumnLabel = "businesscertificate";
-    		break;
-    	}
     	}
     	String columnItem;
     	if(tableItem[i] == "Password") {
@@ -82,28 +76,9 @@ public class ProfileUpdate {
         	detail.add(new String[] {checkingColumnLabel,hashtext});
         	}
     	}
-    	else if(tableItem[i] == "Tax ID") {
-    		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username , checkingColumnLabel, columnLabel);
-    		System.out.print( "Your "+tableItem[i]+" : ( Your previous "+tableItem[i]+" is : "+oldValue+" )" );
-        	columnItem = input.nextLine();
-        	if(columnItem.equals("")) {
-            	detail.add(new String[] {checkingColumnLabel,oldValue});
-        	}
-        	else {
-        		enteredValue = columnItem;
-        		MysqlCon.checkingDups(tablename , enteredValue , checkingColumnLabel);
-        		if(MysqlCon.checkingDups(tablename , enteredValue , checkingColumnLabel).equals(enteredValue)) {
-                	detail.add(new String[] {checkingColumnLabel,columnItem});
-        		}else {
-            		System.out.println("\nYour Tax ID exists. make sure that you enter right Tax ID ... \n");
-            		i--;
-        		}
-        	}
-    	}
     	else if(tableItem[i] == "Name") {
     		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username, checkingColumnLabel, columnLabel);
+    		oldValue = MysqlCon.oldValueShow(tablename , loggedInCust.getCustomerusername(), checkingColumnLabel, columnLabel);
     		System.out.print( "Your "+tableItem[i]+" :  ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
         	columnItem = input.nextLine();
         	if(columnItem.equals("")) {
@@ -115,7 +90,7 @@ public class ProfileUpdate {
     	}
     	else if(tableItem[i] == "Address") {
     		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username, checkingColumnLabel, columnLabel);
+    		oldValue = MysqlCon.oldValueShow(tablename , loggedInCust.getCustomerusername(), checkingColumnLabel, columnLabel);
     		System.out.print( "Your "+tableItem[i]+" : ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
         	columnItem = input.nextLine();
         	if(columnItem.equals("")) {
@@ -127,7 +102,7 @@ public class ProfileUpdate {
     	}
     	else if(tableItem[i] == "Phone Number") {
     		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username, checkingColumnLabel, columnLabel);
+    		oldValue = MysqlCon.oldValueShow(tablename , loggedInCust.getCustomerusername(), checkingColumnLabel, columnLabel);
     		System.out.print( "Your "+tableItem[i]+" : ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
         	columnItem = input.nextLine();
         	if(columnItem.equals("")) {
@@ -139,7 +114,7 @@ public class ProfileUpdate {
     	}
     	else if(tableItem[i] == "Nationality") {
     		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username, checkingColumnLabel, columnLabel);
+    		oldValue = MysqlCon.oldValueShow(tablename , loggedInCust.getCustomerusername(), checkingColumnLabel, columnLabel);
     		System.out.print( "Your "+tableItem[i]+" : ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
         	columnItem = input.nextLine();
         	if(columnItem.equals("")) {
@@ -149,51 +124,9 @@ public class ProfileUpdate {
             	detail.add(new String[] {checkingColumnLabel,columnItem});
         	}
     	}
-    	else if(tableItem[i] == "Cooking Certificate") {
-    		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username , checkingColumnLabel, columnLabel);
-        	System.out.print( "Do You Have Cooking Certificate ? (Yes / No)   : ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
-        	columnItem = input.nextLine();
-        	if(columnItem.equals("")) {
-            	detail.add(new String[] {checkingColumnLabel,oldValue});
-        	}
-        	else {
-        		if(columnItem.equals("Yes")) {
-                	detail.add(new String[] {checkingColumnLabel,columnItem});
-        		}
-        		else if (columnItem.equals("No")) {
-                	detail.add(new String[] {checkingColumnLabel,columnItem});
-        		}
-        		else {
-               		System.out.println("\nYou entered Wrong value for Cooking Certificate use Yes or No ...\n");
-            		i--;
-        		}
-        	}
-    	}
-    	else if(tableItem[i] == "Business Certificate") {
-    		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username , checkingColumnLabel, columnLabel);
-        	System.out.print( "Do You Have Business Certificate ? (Yes / No)   : ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
-        	columnItem = input.nextLine();
-        	if(columnItem.equals("")) {
-            	detail.add(new String[] {checkingColumnLabel,oldValue});
-        	}
-        	else {
-        		if(columnItem.equals("Yes")) {
-                	detail.add(new String[] {checkingColumnLabel,columnItem});
-        		}
-        		else if (columnItem.equals("No")) {
-                	detail.add(new String[] {checkingColumnLabel,columnItem});
-        		}
-        		else {
-               		System.out.println("\nYou entered Wrong value for Business Certificate use Yes or No ...\n");
-            		i--;
-        		}
-        	}
-    	}
     	else if(tableItem[i] == "Sex"){
     		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename , username , checkingColumnLabel, columnLabel);
+    		oldValue = MysqlCon.oldValueShow(tablename , loggedInCust.getCustomerusername() , checkingColumnLabel, columnLabel);
 	    	System.out.print( "What is Your "+tableItem[i]+" ( Male / Female ) : ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
 	    	columnItem = input.nextLine();
         	if(columnItem.equals("")) {
@@ -214,7 +147,7 @@ public class ProfileUpdate {
         }
     	else if(tableItem[i] == "Birthday"){
     		columnItem = "";
-    		oldValue = MysqlCon.oldValueShow(tablename, username, checkingColumnLabel, columnLabel);
+    		oldValue = MysqlCon.oldValueShow(tablename, loggedInCust.getCustomerusername(), checkingColumnLabel, columnLabel);
 	    	System.out.println( "What is Your "+tableItem[i]+" : ( Your previous "+tableItem[i]+" is : "+oldValue+" )");
 	    	System.out.print("Year (e.g. 1990) : ");
 	    	String birthInfo = "";
@@ -251,8 +184,8 @@ public class ProfileUpdate {
     	i++;
     }
         MysqlCon.updateTable(tablename, detail, condition);
-        MealsandDeals.main(null);
+        MenuPageCustomer.decisioner(loggedInCust);
     input.close();
-    }
 
+}
 }

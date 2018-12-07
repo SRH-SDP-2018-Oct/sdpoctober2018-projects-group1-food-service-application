@@ -1,7 +1,5 @@
 package com.srh_heidelberg.mealsanddeals;
 
-import java.io.Console;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -12,10 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
-
 public class FoodOption {
-	private static MysqlCon db;
 	private static ArrayList<Food> foodlist;
 	private static Food newFood;
 	private static int offerid;
@@ -30,10 +27,11 @@ public class FoodOption {
 		foodlist = new ArrayList<Food>();
 		detail.add(new String[] {"fsausername", loggedInfsa.getFsausername()}); //should be changed
 		detail.add(new String[] {"date", dateFormat.format(date)});
-		db.selectFood("food", detail, foodlist);
+		MysqlCon.selectFood("food", detail, foodlist);
 		
 		System.out.println("---FOOD LIST---");
 		System.out.println("[id]foodname  nameofmeal  foodtype");
+		System.out.println("----------------------------------");
 		
 		for(int i=0; i<foodlist.size(); i++) {
 			System.out.println("["+ foodlist.get(i).getFoodid() +"]" + foodlist.get(i).getFoodname() +"  "+ foodlist.get(i).getNameofmeal()  +"  "+ foodlist.get(i).getFoodtype());
@@ -42,7 +40,7 @@ public class FoodOption {
 	public static void AddFood(Date date) throws NoSuchAlgorithmException, ParseException {
 		ArrayList<String> foodcolumn = new ArrayList<String>();
 		ArrayList<String> detail = new ArrayList<String>();
-		db.getColumnName("food", foodcolumn);
+		MysqlCon.getColumnName("food", foodcolumn);
 		
 		Scanner sc = new Scanner(System.in);	
 		
@@ -70,13 +68,13 @@ public class FoodOption {
 			}	
 		}
 		
-		db.insertToTable("food", detail);
+		MysqlCon.insertToTable("food", detail);
 	}
 	public static void EditFood(Food newFood) throws SQLException {
 		ArrayList<String> foodcolumn = new ArrayList<String>();
 		ArrayList<String[]> foodinfo = new ArrayList<String[]>();
 		
-		db.getColumnName("food", foodcolumn);
+		MysqlCon.getColumnName("food", foodcolumn);
 		
 		foodcolumn.remove("dateofadding");
 		foodcolumn.remove("foodid");
@@ -110,7 +108,7 @@ public class FoodOption {
 		}
 		
 		condition.add(new String[] {"foodid", String.valueOf(newFood.getFoodid())}); //primary key -> need to be changed
-		db.updateTable("food", detail, condition);
+		MysqlCon.updateTable("food", detail, condition);
 	}
 	public static void DeleteFood(Date date, int foodid) throws NoSuchAlgorithmException, ParseException, SQLException {
 		ArrayList<String[]> detail = new ArrayList<String[]>();
@@ -130,16 +128,14 @@ public class FoodOption {
 			}
 		}
 		else 
-			db.deleteFromTable("food", detail);
-		
+			MysqlCon.deleteFromTable("food", detail);
 	}
 	public static boolean checkOffer(Date date, int foodid) throws ParseException {
 		try {
-			Connection conn = db.createConn();
+			Connection conn = MysqlCon.createConn();
 			Statement stmt = (Statement) conn.createStatement();
 			String selectq = "select offerid from offer where foodid = "+ foodid;
 			ResultSet rs = stmt.executeQuery(selectq);
-			ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
 			
 			while(rs.next()) {
 				offerid = rs.getInt("offerid");
@@ -150,10 +146,10 @@ public class FoodOption {
 			return false;
 				
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
+		
 	}
 	public static void SelectFood(Date date) throws ParseException, NoSuchAlgorithmException, SQLException {
 		System.out.print("Enter Foodid>>");
@@ -189,7 +185,6 @@ public class FoodOption {
 	}
 	public static void ShowFoodOption(Date date, FSA loggedInFsa) throws ParseException, NoSuchAlgorithmException, SQLException {
 		loggedInfsa = loggedInFsa;
-		FsaDayPage daypage = new FsaDayPage();
 		PrintFoodList(date);
 		System.out.print("1: add food\n2: select existing food\n3: back to day\n>>");
 		Scanner sc = new Scanner(System.in);
@@ -199,7 +194,7 @@ public class FoodOption {
 		case 1: AddFood(date);
 				ShowFoodOption(date,loggedInfsa);
 		case 2: SelectFood(date);
-		case 3: daypage.BacktoDay(date);
+		case 3: FsaDayPage.BacktoDay(date);
 		}
 	}
 	

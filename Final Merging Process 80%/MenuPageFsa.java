@@ -5,23 +5,26 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class ProfilePage extends CustomerPage {
-	public void main() {
+public class MenuPageFsa {
+	private static FSA loggedInfsa = new FSA();
+	public static void decisioner(FSA loggedInFsa) throws NoSuchAlgorithmException, ParseException, SQLException {
+		loggedInfsa = loggedInFsa;
 		Overview();
 	}
-	private CustomerMain navi = new CustomerMain();
+	
 
-	public void Overview(Customer loggedInCustomer){
-		System.out.println("\n1 - to Return to Homepage\n2 - Profile\n3 - Messages\n4 - Logout");
+	public static void Overview() throws NoSuchAlgorithmException, ParseException, SQLException{
+		System.out.println("\n1: to Return to Homepage\n2: Profile\n3: Messages\n4: Logout");
 		Scanner reader = new Scanner(System.in);
 		int customerInput = reader.nextInt();
 		switch (customerInput) {
-		case 1: navi.navigation(loggedInCustomer);
+		case 1: FsaHomepage.main(loggedInfsa);
 		break;
 		case 2: 
-//				profile();
+				ProfileFSA.decisioner(loggedInfsa);
 		break;
-		case 3: //Messages();
+		case 3: 
+				NotificationPage.notificationPageFSA(loggedInfsa);
 		break;
 		case 4: try {
 				MealsandDeals.main(null);
@@ -32,7 +35,7 @@ public class ProfilePage extends CustomerPage {
 			}
 		break;
 		default: System.out.println("Invalid Input");
-		Overview();
+		decisioner(loggedInfsa);
 		break;
 		}
 		reader.close();
@@ -40,10 +43,4 @@ public class ProfilePage extends CustomerPage {
 
 	
 }
-
-	@Override
-	public void Overview() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class GetNotificationList extends MysqlCon{
 	
 	
-	public void GetAllNotificationList(ArrayList<Notification> notificationlist) {
+	public void GetAllNotificationList(ArrayList<Notification> notificationlist, String receivername) {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			con = createConn();
-			String sql = "select * from notification ";//���� 
+			String sql = "select * from notification WHERE receiverusername = " + receivername;
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 						
@@ -29,7 +29,6 @@ public class GetNotificationList extends MysqlCon{
 					newNotification.setSubject(rs.getString("subject"));
 					newNotification.setContent(rs.getString("content"));
 					newNotification.setSenddate(rs.getDate("senddate"));
-					newNotification.setReceivedate(rs.getDate("receivedate"));
 					newNotification.setStatus(rs.getString("status"));
 					notificationlist.add(newNotification);
 		

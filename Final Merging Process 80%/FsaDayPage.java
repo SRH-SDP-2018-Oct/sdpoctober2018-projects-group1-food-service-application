@@ -1,32 +1,22 @@
 package com.srh_heidelberg.mealsanddeals;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
-import com.mysql.jdbc.*;
-import com.mysql.cj.jdbc.*;
 
 
 public class FsaDayPage {
 	private static FSA loggedInfsa = new FSA();
 
-	@SuppressWarnings("static-access")
-	
 	public static void BacktoDay(Date date) throws ParseException, NoSuchAlgorithmException, SQLException {
 		ShowDay(date,loggedInfsa);
 	}
 	public static void BacktoChooseDate() throws ParseException, NoSuchAlgorithmException, SQLException {
-		FsaHomepage home = new FsaHomepage();
-		home.manageFoodlist();
+		FsaHomepage.manageFoodlist();
 	}
 	public static void ShowDay(Date date,FSA loggedInFsa) throws ParseException, NoSuchAlgorithmException, SQLException {
 		loggedInfsa = loggedInFsa;
