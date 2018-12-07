@@ -48,7 +48,7 @@ CREATE TABLE `fsa` (
 
 LOCK TABLES `fsa` WRITE;
 /*!40000 ALTER TABLE `fsa` DISABLE KEYS */;
-INSERT INTO `fsa` VALUES ('ash','Male','1990-01-01','','','1','','ash1','ae9ef5e140f92d85ff0fe0b528d041a2',1,'Yes','Yes','Inactive'),('ashkan','Male','1988-04-19','Iranian','MPS3','2','+491626092491','ash11866','19772e1d7acc5cb84d4a2a45b14e204f',12345678910,'Yes','Yes','Inactive'),('ash','Male','1990-01-01','','','ashkan.ess@gmail.com','','ash4','255c3109cf58817d3718b8707b890a9a',4,'Yes','No','Inactive'),('ash5','Male','1990-01-01','','','6','','ash5','a2f3f476b7c18f833f40b15ed2c035cc',5,'No','Yes','Inactive'),('ash','Male','1990-01-01','','','ashkan.ee@gmail.com','','ash8','8df6f60c9b6093006b08c78a8efe4708',8,'No','No','Inactive');
+INSERT INTO `fsa` VALUES ('ash','Male','1990-01-01','','','1','','ash1','ae9ef5e140f92d85ff0fe0b528d041a2',1,'Yes','Yes','Active'),('ashkan','Male','1988-04-19','Iranian','MPS3','2','+491626092491','ash11866','2852f697a9f8581725c6fc6a5472a2e5',12345678910,'Yes','Yes','Active'),('Ashkan','Male','1988-04-19','Iranian','MPS 45','ashkan.esshaghi@gmail.com','456123798','ash3','27ce24963b5084410e389bc250cdae82',5,'Yes','Yes','Active'),('ash','Male','1999-12-30','Iranian','MPS34','ashkan.ess@gmail.com','9','ash4','255c3109cf58817d3718b8707b890a9a',4,'Yes','Yes','Active'),('Ashkan','Male','1880-09-20','Iranian','BS5','ashkan.ee@gmail.com','465','ash7','3d415832391b3f7c0c2f4d735dbe8bbb',9,'Yes','Yes','Active');
 /*!40000 ALTER TABLE `fsa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-04 18:35:42
+-- Dump completed on 2018-12-07 13:06:45

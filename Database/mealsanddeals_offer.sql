@@ -32,7 +32,7 @@ CREATE TABLE `offer` (
   PRIMARY KEY (`offerid`),
   KEY `foodidoffer_idx` (`foodid`),
   CONSTRAINT `foodidoffer` FOREIGN KEY (`foodid`) REFERENCES `food` (`foodid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-04 18:35:42
+-- Dump completed on 2018-12-07 13:06:46

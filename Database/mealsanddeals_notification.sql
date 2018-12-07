@@ -29,7 +29,6 @@ CREATE TABLE `notification` (
   `subject` varchar(45) DEFAULT NULL,
   `content` text,
   `senddate` date DEFAULT NULL,
-  `receivedate` date DEFAULT NULL,
   `status` enum('Read','Unread') DEFAULT NULL,
   PRIMARY KEY (`notificationid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-04 18:35:43
+-- Dump completed on 2018-12-07 13:06:46

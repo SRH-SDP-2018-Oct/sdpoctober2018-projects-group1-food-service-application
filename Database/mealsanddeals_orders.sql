@@ -16,27 +16,45 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `admin` (
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`username`)
+CREATE TABLE `orders` (
+  `orderid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ordertime` date DEFAULT NULL,
+  `deliverytype` varchar(45) DEFAULT NULL,
+  `foodprice` float DEFAULT NULL,
+  `deliverycharge` float DEFAULT NULL,
+  `totalamount` tinyint(4) DEFAULT NULL,
+  `orderlocation` text,
+  `paymenttype` varchar(45) DEFAULT NULL,
+  `fsausername` varchar(45) DEFAULT NULL,
+  `customerusername` varchar(45) DEFAULT NULL,
+  `foodid` bigint(20) DEFAULT NULL,
+  `ranking` enum('Ranked','Unranked') DEFAULT NULL,
+  `status` enum('Open','Closed') DEFAULT NULL,
+  `foodname` varchar(45) DEFAULT NULL,
+  `nationality` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`orderid`),
+  KEY `fsausernameorder_idx` (`fsausername`),
+  KEY `customerusernameorder_idx` (`customerusername`),
+  KEY `foodidorder_idx` (`foodid`),
+  CONSTRAINT `customerusernameorder` FOREIGN KEY (`customerusername`) REFERENCES `customer` (`customerusername`),
+  CONSTRAINT `foodidorder` FOREIGN KEY (`foodid`) REFERENCES `food` (`foodid`),
+  CONSTRAINT `fsausernameorder` FOREIGN KEY (`fsausername`) REFERENCES `fsa` (`fsausername`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `orders`
 --
 
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES ('admin','21232f297a57a5a743894a0e4a801fc3');
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-07 13:06:46
+-- Dump completed on 2018-12-07 13:06:47
