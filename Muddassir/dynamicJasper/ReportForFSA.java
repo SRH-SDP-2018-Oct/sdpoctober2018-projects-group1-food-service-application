@@ -16,12 +16,13 @@ public class ReportForFSA implements ReportInterface {
 	
  
 	@Override
-	public String generateQuery() {
+	public void generateQuery(String username) {
 		String querString = "";		
 		String status = null;
 		String deliveryType = null;
 		String orderTimeFrom = null;
 		String orderTimeTo = null;
+		String fsaUsername = username;
 		String qGen = "";
 		String table_1 = "orders";
 		String table_2 = "food";
@@ -109,23 +110,23 @@ public class ReportForFSA implements ReportInterface {
 	        }
 		
 		if (queryArray.size() >=1) {
-			querString = select + table_1+ " where " + qGen+ " order by ordertime desc";
+			querString = select + table_1+ " where fsausername='"+fsaUsername+"' and " + qGen+ " order by ordertime desc";
 		}else {
-			querString = select + table_1+ " order by ordertime desc";
+			querString = select + table_1+ " where fsausername='"+fsaUsername+"'"+" order by ordertime desc";
 		}
 		
+		generateReport(querString, fsaUsername);
 		//System.out.println(querString);
-        scanner.close();
-		return querString;
+        //scanner.close();
+		//return querString;
 
 	}
 
 	@Override
-	public void generateReport(String query) {
+	public void generateReport(String query, String fsaUsername) {
 		Connection conn = null;
 		PreparedStatement prStmt = null;
 		ResultSet rs = null;
-		
 		        
 		try {
 			conn = RootCon.createConn();
@@ -161,7 +162,8 @@ public class ReportForFSA implements ReportInterface {
 					DJCalculation.SUM);
 			*/
 			report.show();
-
+			generateQuery(fsaUsername);
+			
 						
 			if (rs == null) {
 				System.out.println("No result set found");
@@ -194,8 +196,7 @@ public class ReportForFSA implements ReportInterface {
 			RootCon.closePrStmt(prStmt);
 			RootCon.closeConn(conn);
 		}
-		
-		
+						   
 	}
 
 }

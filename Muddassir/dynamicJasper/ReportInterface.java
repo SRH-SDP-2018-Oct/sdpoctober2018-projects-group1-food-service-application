@@ -1,6 +1,6 @@
 package report.dynamicJasper;
 
 public interface ReportInterface {
-	String generateQuery();
-	void generateReport(String query);
+	void generateQuery(String username);
+	void generateReport(String query, String username);
 }

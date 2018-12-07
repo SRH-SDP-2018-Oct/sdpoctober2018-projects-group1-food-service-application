@@ -17,12 +17,10 @@ import org.srh.db.RootCon;
 
 
 public class ReportForCustomer implements ReportInterface{
-	
-
-	
+		
 	@Override
 	
-	public String generateQuery() {
+	public void generateQuery(String username) {
 		String querString = "";		
 		String status = "";
 		String fsausername = null;
@@ -31,12 +29,13 @@ public class ReportForCustomer implements ReportInterface{
 		String nationality = "";
 		String foodname = "";
 		String qGen = "";
+		String custUserName = username;
 		String table_1 = "orders";
 		String table_2 = "food";
 		String select = "select status, fsausername, deliverycharge, nationality, foodname, totalamount, foodprice, ordertime,"
 				+ " ((totalamount * foodprice)+deliverycharge) AS total from mealsanddeals.";
 		HashMap<String, String> queryArray = new HashMap<String, String>();
-			
+		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Status:  [Open/Closed]");
 		status = scanner.nextLine().trim();
@@ -70,8 +69,7 @@ public class ReportForCustomer implements ReportInterface{
 		orderTimeTo = scanner.nextLine().trim();				
 		if (!"".equalsIgnoreCase(orderTimeTo)) {
 			queryArray.put("ordertime<=",orderTimeTo);
-		}
-		
+		}		
 		
 		int i = 1;
 		for (Map.Entry<String, String> me : queryArray.entrySet()) {
@@ -127,19 +125,19 @@ public class ReportForCustomer implements ReportInterface{
 	        }
 		
 		if (queryArray.size() >=1) {
-			querString = select + table_1+ " where " + qGen+ " order by ordertime desc";
+			querString = select + table_1+ " where customerusername='"+custUserName+"' and " + qGen+ " order by ordertime desc";
 		}else {
-			querString = select + table_1+" order by ordertime desc";
+			querString = select + table_1+" where customerusername='"+custUserName+"'" +" order by ordertime desc";
 		}
 		
+		generateReport(querString, custUserName);
+        //scanner.close();
 		//System.out.println(querString);
-        scanner.close();
-		return querString;
-
-	}	
+		//return querString;
+}	
 	@Override
 	
-	public void generateReport(String query) {
+	public void generateReport(String query, String custUserName) {
 		Connection conn = null;
 		PreparedStatement prStmt = null;
 		ResultSet rs = null;
@@ -175,11 +173,11 @@ public class ReportForCustomer implements ReportInterface{
 			      Components.text("Food Service Agent Report"))
 				  .pageFooter(Components.pageXofY())//show page number on the page footer
 				  .setDataSource(query, conn);
-					
+				
 			
 			report.show();
-
-						
+			generateQuery(custUserName);
+			
 			if (rs == null) {
 				System.out.println("No result set found");
 				throw new NullPointerException();
@@ -190,6 +188,7 @@ public class ReportForCustomer implements ReportInterface{
 			// Will run the loop till the end of the record in the table
 			while (rs.next()) {
 				isEmpty = false;
+				
 				//System.out.println("Name:" + rs.getString("name") + " || Username:" + rs.getString("customerUsername"));
 			}
 			
@@ -207,6 +206,7 @@ public class ReportForCustomer implements ReportInterface{
 			System.exit(0);
 		}
 		finally {
+			
 			RootCon.closeRs(rs);
 			RootCon.closePrStmt(prStmt);
 			RootCon.closeConn(conn);
