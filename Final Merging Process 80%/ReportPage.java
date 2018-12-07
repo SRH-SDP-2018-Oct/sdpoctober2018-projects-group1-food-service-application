@@ -38,6 +38,12 @@ public class ReportPage extends CustomerPage {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void switchMenupage(int input) throws NoSuchAlgorithmException, ParseException, SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

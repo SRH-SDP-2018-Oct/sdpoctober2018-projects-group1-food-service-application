@@ -18,35 +18,29 @@ public class CustomerMain {
 		System.out.println("Welcome to Meals and Deals. For Navigation\n1: Calendar\n2: Report\n3: Menu");
 		int customerInput = reader.nextInt();
 		switchMenupage(customerInput);
-		reader.close();	
+//		reader.close();	
 	}
 	
 public static void switchMenupage(int input) throws NoSuchAlgorithmException, ParseException, SQLException{
 	
 	 int switchMenu = input;
-	 String menuString;
-	 CalendarPage page = new CalendarPage();
-	 ReportPage repPage = new ReportPage();
+	 CalendarPage calendarpage = new CalendarPage();
+	 ReportPage reportPage = new ReportPage();
 				switch(switchMenu) {
 				case 0: 
 					customerMainPage();
 					break;
-				case 1:menuString = "Welcome to Calendar Page";
-				System.out.println(menuString);
-//				order.selectOrdersFromUser("jisu123"); //Make this general
-//				ranking.rankOrders(order.CustomerUnrankedOrders);
-				page.Overview();
+				case 1:
+					calendarpage.Overview(loggedInCust);
 				break;
-				case 2: menuString = "Welcome to Report Page";
-				System.out.println(menuString);
-				repPage.Overview(loggedInCust);
+				case 2: 
+					reportPage.Overview(loggedInCust);
 				break;
-				case 3: menuString = "Welcome to MenuPage";
-				MenuPageCustomer.decisioner(loggedInCust);
+				case 3: 
+					MenuPageCustomer.decisioner(loggedInCust);
 				break;
-				default: menuString = "Invalid Input";
-				System.out.println(menuString);
-				switchMenupage(0);
+				default:
+					switchMenupage(0);
 				break;
 				}
 }
