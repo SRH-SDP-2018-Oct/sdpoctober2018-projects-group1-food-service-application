@@ -3,7 +3,6 @@ package mealsanddeals;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import mealsanddeals.MysqlCon;
 
 
 //read notification 
@@ -57,20 +56,22 @@ public class ReadNotification {
 	  	
 	  		Sql.updateTable(tablename,setquery,conditionquery);
 			
-	  		System.out.println("Sender\t Receiver\t Send Time\t Receive Time\t Subject\t Content \tStatus");
+	  		System.out.println("Sender\t Receiver\t Send Time\t Subject\t Content \tStatus");
 	  		System.out.println("--------------------------------------------------------------------------------------------------------\n");
 	  		System.out.println(NotificationList.get(index).getSenderusername() +"\t"+ NotificationList.get(index).getReceiverusername() +"\t"+
-					   NotificationList.get(index).getSenddate() +"\t"+ NotificationList.get(index).getReceivedate() +"\t"+ 
-			           NotificationList.get(index).getSubject() +"\t"+ NotificationList.get(index).getContent() + "\t"+"read");
+					   NotificationList.get(index).getSenddate() +"\t"+ NotificationList.get(index).getSubject() 
+					   +"\t"+ NotificationList.get(index).getContent() + "\t"+"read");
 	  	}
 	  	
 	  	
 	  	
 	    //delete notification by selecting notification id 
-		public void deleteNotification(int id ) {
+	  	public void deleteNotification(int id ) {
 			ArrayList<String[]> queryarray = new  ArrayList<String[]>();
-			queryarray.add(new String[] {"notificationid","id"});
-	    	Sql.deleteFromTable(tablename, queryarray);
+			queryarray.add(new String[] {"notificationid",String.valueOf(id)});
+			
+			Sql.deleteFromTable(tablename, queryarray);
+		
 	    }
 		
 		

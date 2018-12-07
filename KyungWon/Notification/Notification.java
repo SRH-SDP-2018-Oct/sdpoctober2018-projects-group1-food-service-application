@@ -9,7 +9,6 @@ public class Notification {
 	String subject;
 	String content;
 	Date senddate;
-	Date receivedate;
 	String status;
 	MysqlCon newSql = new MysqlCon();
 	
@@ -48,12 +47,6 @@ public class Notification {
 	}
 	public void setSenddate(Date senddate) {
 		this.senddate = senddate;
-	}
-	public Date getReceivedate() {
-		return receivedate;
-	}
-	public void setReceivedate(Date receivedate) {
-		this.receivedate = receivedate;
 	}
 	public String getStatus() {
 		return status;

@@ -29,7 +29,6 @@ public class GetNotificationList extends MysqlCon{
 					newNotification.setSubject(rs.getString("subject"));
 					newNotification.setContent(rs.getString("content"));
 					newNotification.setSenddate(rs.getDate("senddate"));
-					newNotification.setReceivedate(rs.getDate("receivedate"));
 					newNotification.setStatus(rs.getString("status"));
 					notificationlist.add(newNotification);
 		
