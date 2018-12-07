@@ -1,3 +1,4 @@
+import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -30,13 +31,12 @@ public class OfferOption {
 			System.out.println("["+ offerlist.get(i).getOfferid() +"]" + offerlist.get(i).getFoodamount() +"  "+ offerlist.get(i).getDiscount());
 		}
 	}
-	public static void AddOffer(Date date, int foodid) throws NoSuchAlgorithmException, ParseException, SQLException {
-		ArrayList<String> offercolumn = new ArrayList<String>();
+	public static void AddOffer(Date date, int foodid) throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+		//ArrayList<String> offercolumn = new ArrayList<String>();
 		ArrayList<String> detail = new ArrayList<String>();
-		db.getColumnName("offer", offercolumn);
+		//db.getColumnName("offer", offercolumn);
 		
 		Scanner sc = new Scanner(System.in);
-		
 		int offerid = 0;
 		if(FoodOption.checkOffer(date, foodid)==true) {
 			System.out.println("WARNING : There is offer with the food you want to delete! \n1: back to food option");
@@ -45,46 +45,19 @@ public class OfferOption {
 			case 1: FoodOption.ShowFoodOption(date);
 			}
 		} else {
-			for(int i=0; i<offercolumn.size(); i++) {
-				if(offercolumn.get(i).equals("date")) {
-					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-					detail.add(dateFormat.format(date));
-				} else if(offercolumn.get(i).equals("foodid")) {
-					detail.add(String.valueOf(foodid));
-				} else if(offercolumn.get(i).equals("offerid")) {
-					detail.add("0");
-				} else if(offercolumn.get(i).equals("fsausername")) {
-					detail.add("ash2"); // should be fixed
-				}
-				else {
-					String info = "";
-					System.out.print("Enter "+ offercolumn.get(i) +">> ");
-					info = sc.nextLine();
-					detail.add(info);
-				}	
-			}
+			Offer newOffer = new Offer();
+			newOffer.setoffer(foodid, date);
+			detail = newOffer.makeQuery();
 				
 			db.insertToTable("offer", detail);
 		}
 	}
-	public static void EditOffer(Offer newOffer) throws SQLException {
-		ArrayList<String> offercolumn = new ArrayList<String>();
-		ArrayList<String[]> offerinfo = new ArrayList<String[]>();
-		
-		db.getColumnName("offer", offercolumn);
-		
-		offercolumn.remove("offerid");
-		offercolumn.remove("foodid");
-		offercolumn.remove("fsausername");
-		
-		newOffer.setOffer(offercolumn, offerinfo);
+	public static void EditOffer(Offer newOffer) throws SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+		//offercolumn = newOffer.getFields();
 		ArrayList<String[]> detail = new ArrayList<String[]>();
 		ArrayList<String[]> condition = new ArrayList<String[]>();
 		
-		for(int i=0; i<offerinfo.size(); i++) 
-			System.out.print("[" + (i+1) +"]" + offerinfo.get(i)[0]+ ": "+ offerinfo.get(i)[1] +"\t");
-		
-		System.out.println("");
+		ArrayList<Field> offercolumn = newOffer.getOffer();
 		
 		Scanner sc = new Scanner(System.in);
 		Scanner sc2 = new Scanner(System.in);
@@ -99,7 +72,7 @@ public class OfferOption {
 			else {
 				System.out.print("Change information>>");
 				editinfo = sc2.nextLine();
-				detail.add(new String[] {offercolumn.get(num-1), editinfo});
+				detail.add(new String[] {offercolumn.get(num-1).getName(), editinfo});
 			}
 		}
 		
@@ -111,7 +84,7 @@ public class OfferOption {
 		detail.add(new String[] {"offerid", String.valueOf(offerid)});
 		db.deleteFromTable("offer", detail);
 	}
-	public static void SelectOffer(Date date) throws ParseException, NoSuchAlgorithmException, SQLException {
+	public static void SelectOffer(Date date) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		System.out.print("Enter Offerid>>");
 		Scanner sc = new Scanner(System.in);
 		int id = sc.nextInt();
@@ -142,7 +115,7 @@ public class OfferOption {
 		case 4: System.exit(0);
 		}
 	}
-	public static void ShowOfferOption(Date date) throws ParseException, NoSuchAlgorithmException, SQLException {
+	public static void ShowOfferOption(Date date) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		FsaDayPage daypage = new FsaDayPage();
 		PrintOfferList(date);
 		System.out.print("1: select existing offer\n2: back to day\n3: quit program\n>>");

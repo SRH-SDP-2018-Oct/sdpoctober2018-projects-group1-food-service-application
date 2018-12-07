@@ -1,16 +1,16 @@
+import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
-import com.mysql.jdbc.ResultSetMetaData;
-import com.mysql.jdbc.Statement;
 
 public class FoodOption {
 	private static MysqlCon db;
@@ -36,58 +36,21 @@ public class FoodOption {
 			System.out.println("["+ foodlist.get(i).getFoodid() +"]" + foodlist.get(i).getFoodname() +"  "+ foodlist.get(i).getNameofmeal()  +"  "+ foodlist.get(i).getFoodtype());
 		}
 	}
-	public static void AddFood(Date date) throws NoSuchAlgorithmException, ParseException {
-		ArrayList<String> foodcolumn = new ArrayList<String>();
+	public static void AddFood(Date date) throws NoSuchAlgorithmException, ParseException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		ArrayList<String> detail = new ArrayList<String>();
-		db.getColumnName("food", foodcolumn);
 		
 		Scanner sc = new Scanner(System.in);	
-		
-		for(int i=0; i<foodcolumn.size(); i++) {
-			if(foodcolumn.get(i).equals("date")) {
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				detail.add(dateFormat.format(date));
-			} else if(foodcolumn.get(i).equals("dateofadding")){
-				long time = System.currentTimeMillis(); 
-				DateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-				detail.add(dayTime.format(new Date(time)));
-			} else if(foodcolumn.get(i).equals("fsausername")) {
-				detail.add("ash2"); //should be fixed
-			} else if(foodcolumn.get(i).equals("foodid")) {
-				detail.add("0"); //auto-increment
-			} else if(foodcolumn.get(i).equals("totalamount")) {
-				int j=i;
-				detail.add(detail.get(j-1));
-			}
-			else {
-				String str = "";
-				System.out.print("Enter "+ foodcolumn.get(i) +">> ");
-				str = sc.nextLine();
-				detail.add(str);
-			}	
-		}
+		Food newFood = new Food();
+		newFood.setFood(date);
+		detail = newFood.makeQuery();
 		
 		db.insertToTable("food", detail);
 	}
-	public static void EditFood(Food newFood) throws SQLException {
-		ArrayList<String> foodcolumn = new ArrayList<String>();
-		ArrayList<String[]> foodinfo = new ArrayList<String[]>();
-		
-		db.getColumnName("food", foodcolumn);
-		
-		foodcolumn.remove("dateofadding");
-		foodcolumn.remove("foodid");
-		foodcolumn.remove("fsausername");
-		
-		newFood.setFood(foodcolumn, foodinfo);
+	public static void EditFood(Food newFood) throws SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		ArrayList<String[]> detail = new ArrayList<String[]>();
 		ArrayList<String[]> condition = new ArrayList<String[]>();
 		
-		for(int i=0; i<foodinfo.size(); i++) {
-			System.out.print("[" + (i+1) +"]" + foodinfo.get(i)[0]+": "+ foodinfo.get(i)[1] + "\t");
-			if((i+1)%5==0)
-				System.out.println("");
-		}
+		ArrayList<Field> foodcolumn = newFood.getFood();
 		
 		Scanner sc = new Scanner(System.in);
 		Scanner sc2 = new Scanner(System.in);
@@ -102,14 +65,14 @@ public class FoodOption {
 			else {
 				System.out.print("Change information>>");
 				editinfo = sc2.nextLine();
-				detail.add(new String[] {foodcolumn.get(num-1), editinfo});
+				detail.add(new String[] {foodcolumn.get(num-1).getName(), editinfo});
 			}
 		}
 		
 		condition.add(new String[] {"foodid", String.valueOf(newFood.getFoodid())}); //primary key -> need to be changed
 		db.updateTable("food", detail, condition);
 	}
-	public static void DeleteFood(Date date, int foodid) throws NoSuchAlgorithmException, ParseException, SQLException {
+	public static void DeleteFood(Date date, int foodid) throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		ArrayList<String[]> detail = new ArrayList<String[]>();
 		detail.add(new String[] {"foodid", String.valueOf(foodid)});
 		Scanner sc = new Scanner(System.in);
@@ -152,7 +115,7 @@ public class FoodOption {
 		}
 		return false;
 	}
-	public static void SelectFood(Date date) throws ParseException, NoSuchAlgorithmException, SQLException {
+	public static void SelectFood(Date date) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		System.out.print("Enter Foodid>>");
 		Scanner sc = new Scanner(System.in);
 		int id = sc.nextInt();
@@ -185,7 +148,7 @@ public class FoodOption {
 		case 5: System.exit(0);
 		}
 	}
-	public static void ShowFoodOption(Date date) throws ParseException, NoSuchAlgorithmException, SQLException {
+	public static void ShowFoodOption(Date date) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		FsaDayPage daypage = new FsaDayPage();
 		PrintFoodList(date);
 		System.out.print("1: add food\n2: select existing food\n3: back to day\n4: quit program\n>>");

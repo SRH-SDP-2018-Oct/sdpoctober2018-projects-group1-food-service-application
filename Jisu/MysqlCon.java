@@ -1,15 +1,16 @@
 //package com.srh_heidelberg.mealsanddeals;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-import java.text.DateFormat;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Date;
-
-import com.mysql.jdbc.ResultSetMetaData;
-import com.mysql.jdbc.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 //import com.srh_heidelberg.mealsanddeals.AdminHomePage;
 
@@ -215,6 +216,7 @@ public class MysqlCon{
 		try {
 			conn = createConn();
 			prStmt = conn.prepareStatement("update "+ tablename + " set " + query +" where " + condition.get(0)[0] + "='" + condition.get(0)[1]+"'");
+			System.out.println("update "+ tablename + " set " + query +" where " + condition.get(0)[0] + "='" + condition.get(0)[1]+"'");
 			prStmt.executeUpdate();
 		
 		} catch (SQLException ex) {
@@ -250,6 +252,7 @@ public class MysqlCon{
 		
 		try {
 			conn = createConn();
+			System.out.println("insert into "+ tablename +" values ("+query+")");
 			prStmt = conn.prepareStatement("insert into "+ tablename +" values ("+query+")");
 			prStmt.executeUpdate();
 			//MealsandDeals.main(null);
@@ -264,23 +267,6 @@ public class MysqlCon{
 		}
 	}
 
-	public static void getColumnName(String tablename, ArrayList<String> columnname) {
-		
-		try {
-			Connection conn = createConn();
-			Statement stmt = (Statement) conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from " + tablename);
-			ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
-			
-			for(int i=1; i<=md.getColumnCount(); i++)
-				columnname.add(md.getColumnName(i));
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	// Login method for fetching Data from database from user input 
 	// Also checking validation of Food Service Agents
 	// Method is general for all logins
