@@ -1,4 +1,4 @@
-package Notification;
+package mealsanddeals;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class GetNotificationList extends MysqlCon{
 	
 	
-	public void GetAllNotificationList(ArrayList<Notification> notificationlist) {
+	public void GetAllNotificationList(ArrayList<Notification> notificationlist, String receivername) {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			con = createConn();
-			String sql = "select * from notification ";//¿¹Á¦ 
+			String sql = "select * from notification WHERE receiverusername = " + receivername;
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 						

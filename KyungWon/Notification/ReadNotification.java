@@ -1,8 +1,9 @@
-package Notification;
+package mealsanddeals;
 
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import Notification.MysqlCon;
+import mealsanddeals.MysqlCon;
 
 
 //read notification 
@@ -16,9 +17,9 @@ public class ReadNotification {
 	    GetNotificationList GetList = new GetNotificationList();
 
 	    //show all notification simple(id number,sendername,sendtime,status)  
-	  	public void showAllNotification() {
+	  	public void showAllNotification(String receivername) {
 	  		NotificationList = new ArrayList<Notification>();
-	  		GetList.GetAllNotificationList(NotificationList);
+	  		GetList.GetAllNotificationList(NotificationList,receivername);
 	  		
 	  		System.out.println("\nNotification List");
 	  		System.out.println("List \t Sender\t Send Time\t Subject\t Status");
@@ -34,11 +35,11 @@ public class ReadNotification {
 	 
 	  	
 	  	//select one notification and show detail content
-	  	public void showDetailNotification(int id) {
+	  	public void showDetailNotification(int id,String receivername) throws SQLException {
 	  		NotificationList = new ArrayList<Notification>();
 	  		ArrayList<String[]> conditionquery = new  ArrayList<String[]>();
 	  		ArrayList<String[]> setquery = new  ArrayList<String[]>();
-	  		GetList.GetAllNotificationList(NotificationList);
+	  		GetList.GetAllNotificationList(NotificationList,receivername);
 	  		
 	  		int i = 0,index = 0;
 	  		
