@@ -161,16 +161,19 @@ public class ReportForCustomer implements ReportInterface{
 			      Columns.column("Status", "status", DataTypes.stringType()),			      
 			      Columns.column("Order Time", "ordertime", DataTypes.stringType()),
 			      Columns.column("Food Price", "foodprice", DataTypes.floatType())
+			      .setPattern("€0.00")
 			      .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER),
 			      Columns.column("Total Amount", "totalamount", DataTypes.integerType())
 			      .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER),
 			      Columns.column("Delivery Charge", "deliverycharge", DataTypes.floatType())
+			      .setPattern("€0.00")
 			      .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER),
 			      Columns.column("Bill", "total", DataTypes.floatType())
+			      .setPattern("€0.00")
 			      .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER)			      
 			      ).highlightDetailEvenRows()
  			  .title(//title of the report
-			      Components.text("Food Service Agent Report"))
+			      Components.text("Customer Report "+custUserName))
 				  .pageFooter(Components.pageXofY())//show page number on the page footer
 				  .setDataSource(query, conn);
 				

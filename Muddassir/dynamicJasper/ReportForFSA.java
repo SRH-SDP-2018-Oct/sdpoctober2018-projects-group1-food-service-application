@@ -146,15 +146,17 @@ public class ReportForFSA implements ReportInterface {
 			      Columns.column("Delivery Type", "deliveryType", DataTypes.stringType()),
 			      Columns.column("Order Time", "ordertime", DataTypes.stringType()),
 			      Columns.column("Food Price", "foodprice", DataTypes.floatType())
+			      .setPattern("€0.00")
 			      .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER),
 			      Columns.column("Total Amount", "totalamount", DataTypes.floatType())
 			      .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER),
 			      Columns.column("Income", "total", DataTypes.floatType())
+			      .setPattern("€0.00")
 			      .setHorizontalTextAlignment(HorizontalTextAlignment.CENTER)
 			      
 			      ).highlightDetailEvenRows()
  			  .title(//title of the report
-			      Components.text("Food Service Agent Report"))
+			      Components.text("Food Service Agent Report "+fsaUsername))
 				  .pageFooter(Components.pageXofY())//show page number on the page footer
 				  .setDataSource(query, conn);	
 			
