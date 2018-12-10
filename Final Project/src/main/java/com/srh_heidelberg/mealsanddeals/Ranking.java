@@ -18,6 +18,7 @@ public class Ranking {
 	private float availablity;
 	private float responsibility;
 	private Order order;
+	private static Customer loggedInCust = new Customer();
 	
 	public Ranking() {
 		
@@ -107,13 +108,14 @@ public class Ranking {
 	public ArrayList<Order> CustomerUnrankedOrders = new ArrayList();
 	
 	
-	public boolean setupRanking(String customerusername) {
+	public boolean setupRanking(Customer loggedInCustomer) {
+		loggedInCust = loggedInCustomer;
 		ArrayList<Order>customerUnrankedOrders = new ArrayList();
 		Connection conn = null;
 		PreparedStatement prStmt = null;
 		ResultSet rs = null;
 		
-		String query = "select * from orders where (customerusername ='"+customerusername +"') and (ranking ='"+ RankingStatus.Unranked + "')and( status ='" + Status.Closed+"')";
+		String query = "select * from orders where (customerusername ='"+loggedInCust.getCustomerusername() +"') and (ranking ='"+ RankingStatus.Unranked + "')and( status ='" + Status.Closed+"')";
 		try {
 			conn = MysqlCon.createConn();
 			prStmt = conn.prepareStatement(query);  
@@ -199,7 +201,6 @@ public class Ranking {
 	private void addRanking(List<Ranking> rankingValues,String customername) {
 		Connection conn = null;
 		PreparedStatement prStmt = null;
-		//insert into ranking values (null,'jisu123','ash3','2','2','2','2','2','3','4');
 		for (int i=0;i<rankingValues.size();i++) {
 			String query ="insert into ranking values("+"'0',"+"'"
 		+customername+"','"+rankingValues.get(i).getFsausername()+"','"

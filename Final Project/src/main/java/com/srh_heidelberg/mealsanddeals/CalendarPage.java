@@ -23,13 +23,13 @@ public class CalendarPage extends CustomerPage {
 
 @Override
 public void Overview(Customer loggedInCustomer) throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+	loggedInCust = loggedInCustomer;
 	Scanner reader = new Scanner(System.in);
 	System.out.println("Welcome to ---->CALENDAR PAGE<----");
 	System.out.println("\n1: Return to Homepage\n2: Order Food");
 	
 	int customerInput = reader.nextInt();
 	switchMenupage(customerInput);
-	loggedInCust = loggedInCustomer;
 	
 	//reader.close();
 	
@@ -53,7 +53,6 @@ public void switchMenupage(int input) throws NoSuchAlgorithmException, ParseExce
 			RankingPage rankingPage = new RankingPage();
 			rankingPage.Overview(loggedInCust);
 			OrderPage orderPage = new OrderPage();
-			System.out.println(calendar.getDate());
 			orderPage.Overview(calendar.getDate(),loggedInCust);
 		} catch (ParseException e) {
 			System.out.println(e.toString());

@@ -20,10 +20,10 @@ public class RankingPage extends CustomerPageNavigation {
 	}
 	
 	public void Overview(Customer loggedInCustomer)throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
+		loggedInCust = loggedInCustomer;
 		Scanner reader = new Scanner(System.in);
 		System.out.println("---->Welcome to RANKING PAGE<----");
-		System.out.println("1: Continue with the Ranking of the Food Service Agent \n2: return to Main Page");
-		loggedInCust = loggedInCustomer;
+		System.out.println("1: Continue with the Ranking of the Food Service Agent \n2: Return to Main Page");
 		int customerInput = reader.nextInt();
 		switchMenupage(customerInput);
 	}
@@ -37,7 +37,7 @@ public class RankingPage extends CustomerPageNavigation {
 			custMain.customerLogin(loggedInCust);
 			break;
 		case 1:
-			ranking.setupRanking(loggedInCust.getCustomerusername());
+			ranking.setupRanking(loggedInCust);
 			rankingValues(ranking.CustomerUnrankedOrders);
 			
 			while(ranking.rankingHandler(rankingInput,loggedInCust.getCustomerusername())) {
@@ -56,32 +56,32 @@ public class RankingPage extends CustomerPageNavigation {
 		
 		for(int i=0;i<unrankedOrders.size();i++) {
 			
-			System.out.println("Please type in the Rating for Quality");
+			System.out.println("Please type in the Rating for Quality ( 1-5 ) : ");
 			float customerInputQuality = reader.nextFloat();
 			ranking.setQuality(customerInputQuality);
 			
-			System.out.println("Please type in the Rating for Price");
+			System.out.println("Please type in the Rating for Price ( 1-5 ) : ");
 			float customerInputPrice = reader.nextFloat();
 			ranking.setPrice(customerInputPrice);
 			
-			System.out.println("Please type in the Rating for Time");
+			System.out.println("Please type in the Rating for Time ( 1-5 ) : ");
 			float customerInputTime = reader.nextFloat();
 			ranking.setTime(customerInputTime);
 			
-			System.out.println("Please type in the Rating for Service");	
+			System.out.println("Please type in the Rating for Service ( 1-5 ) : ");	
 			float customerInputService = reader.nextFloat();
 			ranking.setService(customerInputService);
 			
-			System.out.println("Please type in the Rating for Behaviour");		
+			System.out.println("Please type in the Rating for Behaviour ( 1-5 ) : ");		
 			float customerInputBehaviour = reader.nextFloat();
 			ranking.setBehaviour(customerInputBehaviour);
 			
-			System.out.println("Please type in the Rating for Availability");	
+			System.out.println("Please type in the Rating for Availability ( 1-5 ) : ");	
 			float customerInputAvailability = reader.nextFloat();
 			ranking.setAvailablity(customerInputAvailability);
 			
 			
-			System.out.println("Please type in the Rating for Responsibility");
+			System.out.println("Please type in the Rating for Responsibility ( 1-5 ) : ");
 			float customerInputResponsibility = reader.nextFloat();
 			ranking.setResponsibility(customerInputResponsibility);
 			

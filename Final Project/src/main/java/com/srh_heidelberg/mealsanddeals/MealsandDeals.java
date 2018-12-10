@@ -34,7 +34,7 @@ public class MealsandDeals {
     	}
     	case "2":{
     		String emailId = null;
-        	System.out.println("Please Enter your Email Address :");
+        	System.out.println("Please Enter Your Email Address :");
     		emailId = input.nextLine();
     		MysqlCon.registeringCheck(emailId);
     		break;

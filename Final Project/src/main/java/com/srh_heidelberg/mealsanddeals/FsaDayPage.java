@@ -20,12 +20,11 @@ public class FsaDayPage {
 	}
 	public static void ShowDay(Date date,FSA loggedInFsa) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		loggedInfsa = loggedInFsa;
-		System.out.print("\033[H\033[2J");
 		System.out.println("DAY PAGE");
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		System.out.println("The date you selected is "+ dateFormat.format(date));
 		
-		System.out.print("1: Food option\n2: Offer option\n3: back to Home Page\n>>");
+		System.out.print("1: Food Option\n2: Offer Option\n3: Back\n ");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
 		

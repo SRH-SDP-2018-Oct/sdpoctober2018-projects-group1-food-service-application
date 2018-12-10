@@ -18,7 +18,6 @@ public class OfferOption {
 
 	
 	public static void PrintOfferList(Date date) throws ParseException {
-		System.out.print("\033[H\033[2J");
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		ArrayList<String[]> detail = new ArrayList<String[]>();
@@ -29,13 +28,14 @@ public class OfferOption {
 		db.selectOffer("offer", detail, offerlist);
 		
 		System.out.println("---OFFER LIST---");
-		System.out.println("[id]foodamount  discount");
+		System.out.println("[id] || Food Amount || Discount");
 		
 		for(int i=0; i<offerlist.size(); i++) {
-			System.out.println("["+ offerlist.get(i).getOfferid() +"]" + offerlist.get(i).getFoodamount() +"  "+ offerlist.get(i).getDiscount());
+			System.out.println("["+ offerlist.get(i).getOfferid() +"] || " + offerlist.get(i).getFoodamount()+" || "+ offerlist.get(i).getDiscount());
 		}
 	}
-	public static void AddOffer(Date date, int foodid) throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+	public static void AddOffer(Date date, int foodid, FSA loggedInFsa) throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+		loggedInfsa = loggedInFsa;
 		//ArrayList<String> offercolumn = new ArrayList<String>();
 		ArrayList<String> detail = new ArrayList<String>();
 		//db.getColumnName("offer", offercolumn);
@@ -43,7 +43,7 @@ public class OfferOption {
 		Scanner sc = new Scanner(System.in);
 		int offerid = 0;
 		if(FoodOption.checkOffer(date, foodid)==true) {
-			System.out.println("WARNING : There is offer with the food you want to delete! \n1: back to food option");
+			System.out.println("WARNING : There is Offer with the Food you want to Delete! \n1: Back");
 			int n = sc.nextInt();
 			switch(n) {
 			case 1: FoodOption.ShowFoodOption(date,loggedInfsa);
@@ -70,11 +70,11 @@ public class OfferOption {
 		String editinfo;
 		
 		while(num!=0) {
-			System.out.print("\nSelect number you want to edit(press 0 to exit)>>");
+			System.out.print("\nSelect number you want to Edit(press 0 to exit) : ");
 			num = sc.nextInt();
 			if(num==0) break;
 			else {
-				System.out.print("Change information>>");
+				System.out.print("Change information :");
 				editinfo = sc2.nextLine();
 				detail.add(new String[] {offercolumn.get(num-1).getName(), editinfo});
 			}
@@ -89,7 +89,7 @@ public class OfferOption {
 		db.deleteFromTable("offer", detail);
 	}
 	public static void SelectOffer(Date date) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
-		System.out.print("Enter Offerid>>");
+		System.out.print("Enter Offerid :");
 		Scanner sc = new Scanner(System.in);
 		int id = sc.nextInt();
 		
@@ -106,8 +106,7 @@ public class OfferOption {
 			}
 		}
 		
-		System.out.print("\033[H\033[2J");
-		System.out.print("1: edit offer\n2: delete offer\n3: back to offer option\n4: quit program\n>>");
+		System.out.print("1: Edit Offer\n2: Delete Offer\n3: Back\n: ");
 		int n = sc.nextInt();
 		
 		switch(n) {
@@ -116,21 +115,19 @@ public class OfferOption {
 		case 2: DeleteOffer(id);
 				ShowOfferOption(date,loggedInfsa);
 		case 3: ShowOfferOption(date,loggedInfsa);
-		case 4: System.exit(0);
 		}
 	}
 	public static void ShowOfferOption(Date date, FSA loggedInFsa) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		loggedInfsa = loggedInFsa;
 		FsaDayPage daypage = new FsaDayPage();
 		PrintOfferList(date);
-		System.out.print("1: select existing offer\n2: back to day\n3: quit program\n>>");
+		System.out.print("1: Select Existing Offer\n2: Back\n : ");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
 		
 		switch(n) {
 		case 1: SelectOffer(date);
 		case 2: daypage.BacktoDay(date);
-		case 3: System.exit(0);
 		}
 	}
 }

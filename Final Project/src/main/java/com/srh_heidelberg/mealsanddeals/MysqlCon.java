@@ -309,10 +309,6 @@ public class MysqlCon{
 
 	}
 	
-	public static void clear() {
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
-	}
 
 
 public static void registeringCheck(String emailId){
@@ -887,9 +883,9 @@ public static void deleteFromTable(String tablename, ArrayList<String[]> detail)
 		int r = stmt.executeUpdate(deleteq);
 		
 		if(r==0)
-			System.out.println("cannot delete data");
+			System.out.println("Cannot Delete Data");
 		else
-			System.out.println("successfully deleted data");
+			System.out.println("Successfully Deleted Data");
 		conn.close();
 			
 	} catch (SQLException e) {

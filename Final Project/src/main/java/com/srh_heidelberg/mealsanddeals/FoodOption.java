@@ -22,7 +22,6 @@ public class FoodOption {
 	private static FSA loggedInfsa = new FSA();
 	
 	public static void PrintFoodList(Date date) throws ParseException {
-		System.out.print("\033[H\033[2J");
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		ArrayList<String[]> detail = new ArrayList<String[]>();
@@ -33,14 +32,19 @@ public class FoodOption {
 		db.selectFood("food", detail, foodlist);
 		
 		System.out.println("---FOOD LIST---");
-		System.out.println("[id]foodname  nameofmeal  foodtype");
+		System.out.println("[id] || Foodname || Food Type || Name Of Meal || Hot or Cold || Price || Delivery Option || Payment Option || Available Amount");
 		
 		for(int i=0; i<foodlist.size(); i++) {
-			System.out.println("["+ foodlist.get(i).getFoodid() +"]" + foodlist.get(i).getFoodname() +"  "+ foodlist.get(i).getNameofmeal()  +"  "+ foodlist.get(i).getFoodtype());
+			String payment = "";
+			if (foodlist.get(i).getOnline().equals("Yes")) {
+				payment = "Cash an Online";
+			} else {
+				payment = "Only Cash";
+			}
+			System.out.println("["+ foodlist.get(i).getFoodid() +"] || " + foodlist.get(i).getFoodname()+" || "+ foodlist.get(i).getFoodtype()+" || "+ foodlist.get(i).getNameofmeal()+" || "+ foodlist.get(i).getHotorcold()+" || "+ foodlist.get(i).getPrice()+" € || "+ foodlist.get(i).getDeliveryoption()+" || "+payment+" || "+ foodlist.get(i).getAvailable());
 		}
 	}
 	public static void PrintFoodListCustomer(String query, Date date) throws ParseException {
-		System.out.print("\033[H\033[2J");
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		ArrayList<String[]> detail = new ArrayList<String[]>();
@@ -54,7 +58,13 @@ public class FoodOption {
 		System.out.println("[id] || Foodname || Food Type || Name Of Meal || Hot or Cold || Price || Delivery Option || Payment Option || Available Amount || Agent Name");
 		
 		for(int i=0; i<foodlist.size(); i++) {
-			System.out.println("["+ foodlist.get(i).getFoodid() +"]" + foodlist.get(i).getFoodname() +"  "+ foodlist.get(i).getFoodtype()  +"  "+ foodlist.get(i).getFoodtype()+"  "+ foodlist.get(i).getNameofmeal()+"  "+ foodlist.get(i).getHotorcold()+"  "+ foodlist.get(i).getPrice()+"  "+ foodlist.get(i).getDeliveryoption()+"  "+ foodlist.get(i).getOnline()+"  "+ foodlist.get(i).getAvailable()+"  "+ foodlist.get(i).getFasusername());
+			String payment = "";
+			if (foodlist.get(i).getOnline().equals("Yes")) {
+				payment = "Cash an Online";
+			} else {
+				payment = "Only Cash";
+			}
+			System.out.println("["+ foodlist.get(i).getFoodid() +"] || " + foodlist.get(i).getFoodname() +" || "+ foodlist.get(i).getFoodtype()  +" || "+ foodlist.get(i).getFoodtype()+" || "+ foodlist.get(i).getNameofmeal()+" || "+ foodlist.get(i).getHotorcold()+" || "+ foodlist.get(i).getPrice()+" € || "+ foodlist.get(i).getDeliveryoption()+" || "+payment+" || "+ foodlist.get(i).getAvailable()+" || "+ foodlist.get(i).getFasusername());
 		}
 /*
 		System.out.println("---FOOD LIST---");
@@ -85,11 +95,11 @@ public class FoodOption {
 		String editinfo;
 		
 		while(num!=0) {
-			System.out.print("\nSelect number you want to edit(press 0 to exit)>>");
+			System.out.print("\nSelect Number You Want To Edit(press 0 to exit) : ");
 			num = sc.nextInt();
 			if(num==0) break;
 			else {
-				System.out.print("Change information>>");
+				System.out.print("Change Information :");
 				editinfo = sc2.nextLine();
 				detail.add(new String[] {foodcolumn.get(num-1).getName(), editinfo});
 			}
@@ -105,8 +115,8 @@ public class FoodOption {
 		
 		boolean check = checkOffer(date, foodid);
 		if(check==true) {
-			System.out.println("WARNING : There is offer with the food you want to delete! Delete the offer first");
-			System.out.print("1: delete offer\n2: back to food option\n>>");
+			System.out.println("WARNING : There is an Offer with the Food you want to Delete! Delete the Offer first");
+			System.out.print("1: Delete Offer\n2: Back\n");
  
 			int n = sc.nextInt();
 			System.out.println("offerid : " + offerid);
@@ -142,7 +152,7 @@ public class FoodOption {
 		return false;
 	}
 	public static void SelectFood(Date date) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
-		System.out.print("Enter Foodid>>");
+		System.out.print("Enter Foodid : ");
 		Scanner sc = new Scanner(System.in);
 		int id = sc.nextInt();
 		
@@ -159,8 +169,7 @@ public class FoodOption {
 			}
 		}
 		
-		System.out.print("\033[H\033[2J");
-		System.out.print("1: edit food\n2: delete food\n3: add offer\n4: back to food option\n5: quit program\n>>");	
+	System.out.print("1: Edit Food\n2: Delete Food\n3: Add Offer\n4: Back\n");	
 		int n = sc.nextInt();
 		
 		switch(n) {
@@ -168,7 +177,7 @@ public class FoodOption {
 				ShowFoodOption(date,loggedInfsa);
 		case 2: DeleteFood(date, id);
 				ShowFoodOption(date,loggedInfsa);
-		case 3: OfferOption.AddOffer(date, id);
+		case 3: OfferOption.AddOffer(date, id,loggedInfsa);
 				OfferOption.ShowOfferOption(date,loggedInfsa);
 		case 4: ShowFoodOption(date,loggedInfsa);
 		case 5: System.exit(0);
@@ -176,7 +185,7 @@ public class FoodOption {
 	}
 	
 	public Food SelectFoodCustomer(Date date)throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
-		System.out.print("Enter Foodid>>");
+		System.out.print("Enter Foodid : ");
 		Scanner sc = new Scanner(System.in);
 		int id = sc.nextInt();
 		
@@ -200,7 +209,7 @@ public class FoodOption {
 		loggedInfsa = loggedInFsa;
 		FsaDayPage daypage = new FsaDayPage();
 		PrintFoodList(date);
-		System.out.print("1: Add food\n2: Select existing food\n3: Back to day\n>>");
+		System.out.print("1: Add Food\n2: Select Existing Food\n3: Back\n");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
 		

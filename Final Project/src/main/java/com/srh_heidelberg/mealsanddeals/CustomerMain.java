@@ -11,7 +11,6 @@ public class CustomerMain {
 	
 	public static void customerLogin(Customer loggedInCustomer) throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		loggedInCust = loggedInCustomer;
-		System.out.println(loggedInCust.getName().toString());
 		customerMainPage();
 	}
 	
@@ -35,17 +34,14 @@ public static void switchMenupage(int input) throws NoSuchAlgorithmException, Pa
 					customerMainPage();
 					break;
 				case 1:
-					System.out.println(loggedInCust.getName().toString());
 					calendarpage.Overview(loggedInCust);
 					
 				break;
 				case 2: 
-					System.out.println(loggedInCust.getName().toString());
 					reportPage.Overview(loggedInCust);
 					
 				break;
 				case 3: 
-					System.out.println(loggedInCust.getName().toString());
 					MenuPageCustomer.decisioner(loggedInCust);
 					
 				break;
@@ -55,12 +51,7 @@ public static void switchMenupage(int input) throws NoSuchAlgorithmException, Pa
 				}
 }
 public static void navigation(Customer loggedInCustomer) throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
-		clearScreen();
 		customerMainPage();
 }
-public static void clearScreen() {  
-    System.out.print("\033[H\033[2J");  
-    System.out.flush();  
-}  
 
 }

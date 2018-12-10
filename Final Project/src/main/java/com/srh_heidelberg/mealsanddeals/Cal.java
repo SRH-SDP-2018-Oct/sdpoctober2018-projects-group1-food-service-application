@@ -30,23 +30,21 @@ public class Cal {
 		}
 	}
 	public static void ChooseDate() {
-		System.out.print("\033[H\033[2J");
 		System.out.println("CHOOSE A DATE");
 		
 		PrintCalendar();
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.print("\n\nSelect Date>>");
+		System.out.print("\n\nSelect Date : ");
 		day = sc.next();
 	}
 	public static void ShowCalendar() throws ParseException {
-		System.out.print("\033[H\033[2J");
 		System.out.println("CALENDAR PAGE");
 		Scanner sc = new Scanner(System.in);
 	
-		System.out.print("Select Year>>");
+		System.out.print("Select Year : ");
 		year = sc.next();
-		System.out.print("Select Month>>");
+		System.out.print("Select Month : ");
 		month = sc.next();
 		
 		ChooseDate();

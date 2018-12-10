@@ -17,11 +17,8 @@ public class FsaHomepage {
 	}
 	public static void fsaMain(FSA loggedInFsa) throws ParseException, NoSuchAlgorithmException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
 		loggedInfsa = loggedInFsa;
-		// TODO Auto-generated method stub
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
 		System.out.println("HOME PAGE");
-		System.out.print("1: show calendar\n2: Menu\n>>");
+		System.out.print("1: Show Calendar\n2: Menu\n");
 		int n = sc.nextInt();
 		switch(n) {
 		case 1: manageFoodlist();

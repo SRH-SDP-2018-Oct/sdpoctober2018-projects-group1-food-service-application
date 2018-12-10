@@ -183,7 +183,7 @@ public class EmailConfirmation {
 	      System.out.println("Message is ready");
     	  Transport.send(msg);  
 
-	      System.out.println("EMail Sent Successfully!!");
+	      System.out.println("Email Sent Successfully!!");
 	      
 	    }
 	    catch (Exception e) {
@@ -214,7 +214,7 @@ public class EmailConfirmation {
 	      System.out.println("Message is ready");
     	  Transport.send(msg);  
 
-	      System.out.println("EMail Sent Successfully!!");
+	      System.out.println("Email Sent Successfully!!");
 			if (decisionMaker.equals("nocooking")) {
 				MysqlCon.inactiveUsersWithoutCookingCert();
 			}

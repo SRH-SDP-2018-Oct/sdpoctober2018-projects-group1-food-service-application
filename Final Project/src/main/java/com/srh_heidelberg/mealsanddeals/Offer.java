@@ -85,12 +85,12 @@ public class Offer {
 			else {
 				if(fieldlist[i].getType() == byte.class){
 					byte input = 0;
-					System.out.print("Enter "+ fieldlist[i].getName() +">> ");
+					System.out.print("Enter "+ fieldlist[i].getName() +": ");
 					input = sc.nextByte();
 					fieldlist[i].set(this, input);
 				} else if(fieldlist[i].getType() == float.class){
 					float input = 0;
-					System.out.print("Enter "+ fieldlist[i].getName() +">> ");
+					System.out.print("Enter "+ fieldlist[i].getName() +": ");
 					input = sc.nextFloat();
 					fieldlist[i].set(this, input);
 				}

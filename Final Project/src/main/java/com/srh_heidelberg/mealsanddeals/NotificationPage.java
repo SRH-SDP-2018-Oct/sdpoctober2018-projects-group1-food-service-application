@@ -25,8 +25,8 @@ public class NotificationPage {
 		Scanner scanner2 = new Scanner(System.in);
 		
 		System.out.println("Notification");
-		System.out.println("1: Send \n2: Read \n3: Delete \n4: Back To Menu");
-		System.out.println("Select Number: ");
+		System.out.println("1: Send \n2: Read \n3: Delete \n4: Back");
+		System.out.println("Select Number : ");
 		page = scanner.nextInt();
 				
 		switch(page) {
@@ -61,8 +61,8 @@ public class NotificationPage {
 		Scanner scanner2 = new Scanner(System.in);
 		
 		System.out.println("Notification");
-		System.out.println("1: Send \n2: Read \n3: Delete \n4: Back To Menu");
-		System.out.println("Select Number: ");
+		System.out.println("1: Send \n2: Read \n3: Delete \n4: Back");
+		System.out.println("Select Number : ");
 		page = scanner.nextInt();
 				
 		switch(page) {
@@ -76,7 +76,7 @@ public class NotificationPage {
 			break;
 		case 3://delete notification 
 			Read.showAllNotification(loggedInCustomer.getCustomerusername());
-			System.out.println("Select Delete Notification Number: ");
+			System.out.println("Select Delete Notification Number : ");
 			int id = scanner2.nextInt();
 			Read.deleteNotification(id);
 			backToCustomerNotification(loggedInCustomer);
@@ -96,13 +96,13 @@ public class NotificationPage {
 		int selectpage;
 		Scanner scanner3 = new Scanner(System.in);
 		Scanner scanner4 = new Scanner(System.in);
-		System.out.println("\n1: Select Notificaion \n2: Back To Notification");
-		System.out.println("Select Number: ");
+		System.out.println("\n1: Select Notificaion \n2: Back");
+		System.out.println("Select Number : ");
 		selectpage = scanner3.nextInt();
 		
 		switch(selectpage) {
 			case 1:
-				System.out.println("Select Notification: ");
+				System.out.println("Select Notification Number: ");
 				selectDetailNotification = scanner4.nextInt();
 				Read.showDetailNotification(selectDetailNotification,receivername);
 				backToFSARead(receivername,loggedInfsa);
@@ -122,13 +122,13 @@ public class NotificationPage {
 		int selectpage;
 		Scanner scanner3 = new Scanner(System.in);
 		Scanner scanner4 = new Scanner(System.in);
-		System.out.println("\n1: Select Notificaion \n2: Back To Notification");
-		System.out.println("Select Number: ");
+		System.out.println("\n1: Select Notificaion \n2: Back");
+		System.out.println("Select Number : ");
 		selectpage = scanner3.nextInt();
 		
 		switch(selectpage) {
 			case 1:
-				System.out.println("Select Notification: ");
+				System.out.println("Select Notification Number : ");
 				selectDetailNotification = scanner4.nextInt();
 				Read.showDetailNotification(selectDetailNotification,receivername);
 				backToCustomerRead(receivername,loggedInCustomer);
@@ -158,10 +158,10 @@ public class NotificationPage {
 		String reply;
 		Scanner scanner6 = new Scanner(System.in);
 		while(true) {
-			System.out.println("\nBack To Read Page[Y/N]?");
+			System.out.println("\nBack To Read Page (Yes / No) ?");
 			reply = scanner6.nextLine();
 		
-			if(reply.equalsIgnoreCase("Y")) {
+			if(reply.equalsIgnoreCase("Yes")) {
 				Read.showAllNotification(username);
 				readFSANotificationDetail(username,loggedInfsa);
 				break;
@@ -175,10 +175,10 @@ public class NotificationPage {
 		Scanner scanner6 = new Scanner(System.in);
 		while(true) {
 
-			System.out.println("\nBack To Read Page[Y/N]?");
+			System.out.println("\nBack To Read Page (Yes / No) ?");
 			reply = scanner6.nextLine();
 		
-			if(reply.equalsIgnoreCase("Y")) {
+			if(reply.equalsIgnoreCase("Yes")) {
 				Read.showAllNotification(username);
 				readCustomerNotificationDetail(username,loggedInCustomer);
 				break;

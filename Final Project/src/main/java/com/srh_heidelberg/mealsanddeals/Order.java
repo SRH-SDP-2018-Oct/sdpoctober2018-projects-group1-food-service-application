@@ -22,6 +22,7 @@ public class Order {
 	private long foodid;
 	private RankingStatus ranking;
 	private Status status;
+	private static Customer loggedInCust = new Customer();
 	
 	public Order(long orderid, Date ordertime, String deliverytype, float foodprice, float deliverycharge, short totalamount, String orderlocation, 
 			PaymentType paymenttype, String fsausername, String customerusername, long foodid, RankingStatus ranking, Status status) {
@@ -166,40 +167,42 @@ public class Order {
 	
 	
 	private ArrayList<Order> openOrders = new ArrayList();
-	public boolean orderHandlerAddOrder(String customername, Food selectedFood, int selectedAmount, int paymentType) throws NoSuchAlgorithmException, SQLException {
-		
-		addOrder(customername,selectedFood,selectedAmount,paymentType);
+	public boolean orderHandlerAddOrder(Customer loggedInCustomer, Food selectedFood, int selectedAmount, int paymentType) throws NoSuchAlgorithmException, SQLException {
+		loggedInCust = loggedInCustomer;
+		addOrder(selectedFood,selectedAmount,paymentType);
 		return true;
 	}
 	
-	private Order addOrder(String customerUsername,Food selectedFood,int amount, int paymentType) throws NoSuchAlgorithmException, SQLException {
+	private Order addOrder(Food selectedFood,int amount, int paymentType) throws NoSuchAlgorithmException, SQLException {
 		
 		ArrayList<String> detail = new ArrayList();
 		PaymentType type;
+		String status = "";
 		if(paymentType == 0) {
 			type  = PaymentType.Cash;
-			
+			status = "Closed";			
 		}
 		else {
 			type  = PaymentType.Online;
+			status = "Open";			
 		}
 		
 		String query="'0'"+"'"+selectedFood.getDate()+"''"
 		 +selectedFood.getDeliveryoption()+"''"+selectedFood.getTotalamount()+"''"+selectedFood.getPrice()
-		 +"''"+selectedFood.getFasusername()+"''"+customerUsername+"''" +selectedFood.getFoodid()+"'";
+		 +"''"+selectedFood.getFasusername()+"''"+loggedInCust.getCustomerusername()+"''" +selectedFood.getFoodid()+"'";
 		detail.add("0");
 		detail.add(selectedFood.getDate());
 		detail.add(selectedFood.getDeliveryoption());
 		detail.add(Float.toString(selectedFood.getPrice()*amount));
 		detail.add(Float.toString(((selectedFood.getPrice()*amount)*5)/100));
 		detail.add(Integer.toString(amount));
-		detail.add("Customer Address"); //TO-DO customer object
+		detail.add(loggedInCust.getAddress());
 		detail.add(type.toString());
 		detail.add(selectedFood.getFasusername());
-		detail.add(customerUsername);
+		detail.add(loggedInCust.getCustomerusername());
 		detail.add(Long.toString(selectedFood.getFoodid()));
 		detail.add("Unranked");
-		detail.add("Open");
+		detail.add(status);
 		detail.add(selectedFood.getFoodname());
 		detail.add(selectedFood.getFoodtype());
 		

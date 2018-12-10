@@ -23,7 +23,7 @@ public class OrderPage extends CustomerPageNavigation {
 	}
 	
 	public void Overview(Date selectedDate, Customer loggedInCustomer) throws NoSuchAlgorithmException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException, ParseException, SQLException {
-		//loggedInCust = loggedInCustomer;
+		loggedInCust = loggedInCustomer;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String query = "select * from food where available!='0' and date='"+dateFormat.format(selectedDate)+"'";
 		
@@ -35,7 +35,7 @@ public class OrderPage extends CustomerPageNavigation {
 			System.out.println(e.toString());
 			e.printStackTrace();
 		}
-		System.out.println("\n\n\n-------------\n1: return to the Main Page\n2: Filter your food\n3: Add a new Order\n4: Edit a current order\n5: Delete a current order");
+		System.out.println("\n\n\n-------------\n1: Return to the Main Page\n2: Filter your food\n3: Add a New Order\n4: Edit a Current Order\n5: Delete a Current Order");
 		Scanner reader = new Scanner(System.in);
 		
 		int customerInput = reader.nextInt();
@@ -54,30 +54,31 @@ public class OrderPage extends CustomerPageNavigation {
 			break;
 		case 3:
 			
-			System.out.println(loggedInCust.getName().toString());
-			System.out.println("For adding a new order please enter the food id");
+			System.out.println("For adding a new order please enter the food id : ");
 			int customerInput = reader.nextInt();
-			System.out.println("For adding a new order please enter the amount you want to order");
+			System.out.println("For adding a new order please enter the amount you want to order : ");
 			int customerInputAmount = reader.nextInt();
-			System.out.println("For adding a new order please enter the Payment type");
+			System.out.println("For adding a new order please enter the Payment type : ");
 			int customerInputPaymentType = reader.nextInt();
-				order.orderHandlerAddOrder(loggedInCust.getCustomerusername(),foodOption.SelectFoodCustomer(selectedDate),customerInputAmount,customerInputPaymentType);
-			break;
+				order.orderHandlerAddOrder(loggedInCust,foodOption.SelectFoodCustomer(selectedDate),customerInputAmount,customerInputPaymentType);
+			Overview(selectedDate, loggedInCust);
+				break;
 		case 4:
-			System.out.println(loggedInCust.getName().toString());
 			order.showOpenOrders(loggedInCust.getCustomerusername());
-			System.out.println("For adding a new order please enter the food id");
+			System.out.println("Enter the Order ID you want to Edit :");
 			int customerInputIDEdit = reader.nextInt();
-			System.out.println("For adding a new order please enter the amount you want to order");
+			System.out.println("Your New Amount of Food : ");
 			int customerInputAmountEdit = reader.nextInt();
 			order.editOrder(loggedInCust.getCustomerusername(),customerInputIDEdit,customerInputAmountEdit); //EDIT
+			Overview(selectedDate, loggedInCust);
 			break;
 		case 5:
 			order.showOpenOrders(loggedInCust.getCustomerusername());
-			System.out.println("For adding a new order please enter the food id");
+			System.out.println("Enter Order ID that you want to Delete : ");
 			int customerInputIDDelete = reader.nextInt();
 			order.deleteOrder(loggedInCust.getCustomerusername(),customerInputIDDelete); //DELETE
-			break;
+			Overview(selectedDate, loggedInCust);
+		break;
 			default:
 		}
 	}

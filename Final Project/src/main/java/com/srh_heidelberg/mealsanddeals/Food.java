@@ -21,7 +21,7 @@ public class Food {
 	private String cash;
 	private String online;
 	private String date;
-	private String dateofadding; // need change -> Datetime
+	private String dateofadding;
 	private long foodid;
 	private String fsausername;
 	
@@ -140,22 +140,22 @@ public class Food {
 			else {
 				if(fieldlist[i].getType() == String.class) {
 					String str = "";
-					System.out.print("Enter "+ fieldlist[i].getName() +">> ");
+					System.out.print("Enter "+ fieldlist[i].getName() +" : ");
 					str = sc.next();
 					fieldlist[i].set(this, str);
 				} else if(fieldlist[i].getType() == byte.class){
 					byte input = 0;
-					System.out.print("Enter "+ fieldlist[i].getName() +">> ");
+					System.out.print("Enter "+ fieldlist[i].getName() +" : ");
 					input = sc.nextByte();
 					fieldlist[i].set(this, input);
 				} else if(fieldlist[i].getType() == long.class){
 					long input = 0;
-					System.out.print("Enter "+ fieldlist[i].getName() +">> ");
+					System.out.print("Enter "+ fieldlist[i].getName() +" : ");
 					input = sc.nextLong();
 					fieldlist[i].set(this, input);
 				} else if(fieldlist[i].getType() == float.class){
 					float input = 0;
-					System.out.print("Enter "+ fieldlist[i].getName() +">> ");
+					System.out.print("Enter "+ fieldlist[i].getName() +" : ");
 					input = sc.nextFloat();
 					fieldlist[i].set(this, input);
 				}

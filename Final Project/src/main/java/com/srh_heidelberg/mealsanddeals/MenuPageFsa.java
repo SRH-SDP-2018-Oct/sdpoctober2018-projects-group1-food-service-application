@@ -14,7 +14,7 @@ public class MenuPageFsa {
 	
 
 	public static void Overview() throws NoSuchAlgorithmException, ParseException, SQLException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
-		System.out.println("\n1: to Return to Homepage\n2: Profile\n3: Messages\n4: Logout");
+		System.out.println("\n1: Return to Homepage\n2: Profile\n3: Messages\n4: Logout");
 		Scanner reader = new Scanner(System.in);
 		int customerInput = reader.nextInt();
 		switch (customerInput) {

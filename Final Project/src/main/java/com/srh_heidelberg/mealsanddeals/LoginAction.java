@@ -71,7 +71,7 @@ public class LoginAction {
     	final JPasswordField jpf = new JPasswordField();
     	JOptionPane jop = new JOptionPane(jpf, JOptionPane.QUESTION_MESSAGE,
     	        JOptionPane.OK_CANCEL_OPTION);
-    	JDialog dialog = jop.createDialog("Please enter your Password:");
+    	JDialog dialog = jop.createDialog("Password:");
     	dialog.addComponentListener(new ComponentAdapter() {
     	    @Override
     	    public void componentShown(ComponentEvent e) {

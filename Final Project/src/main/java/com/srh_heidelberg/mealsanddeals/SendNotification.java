@@ -23,7 +23,7 @@ public class SendNotification {
 		//user input 
 		System.out.println("\nEnter Message");
 		while(true) {
-			System.out.println("Receiver Name:");
+			System.out.println("Receiver Name : ");
 			//checking the receiver name in table 
 			String receivername = scanner7.nextLine();
 			String checkingcustomername = "customer";
@@ -39,10 +39,10 @@ public class SendNotification {
 				   System.out.println("Your Receiver name is not available.. \n");
 			}
 		}
-		System.out.println("Subject:");
+		System.out.println("Subject : ");
 		String line = scanner7.nextLine();
 		newNotification.setSubject(line);
-		System.out.println("Content:");
+		System.out.println("Content : ");
 		line = scanner7.nextLine();
 		newNotification.setContent(line);
 
